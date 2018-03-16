@@ -3,14 +3,14 @@ import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-  private WeightedQuickUnionUF grid;
+  private final WeightedQuickUnionUF grid;
   private boolean[][] open_site;
-  private int virtual_top = 0;
-  private int virtual_bot;
-  private int N;
-  private int size;
+  private final int virtual_top = 0;
+  private final int virtual_bot;
+  private final int N;
 
   public Percolation(int n){
+    int size = n * n;
     if(n <= 0) throw new IllegalArgumentException("n must be greated than 0.");
 
     //0 is top and 1 - 25 is grid, 26 is bot
@@ -19,14 +19,13 @@ public class Percolation {
     //n = 5
     //size = 25
     N = n;
-    size = n * n;
     grid = new WeightedQuickUnionUF(size + 2);
     virtual_bot = size + 1; // 26
 
     //Connect to virtual top
     for(int i = 1; i <=n; i++){
       grid.union(virtual_top, i);
-      System.out.println("Connecting virtual top with " + i);
+      //System.out.println("Connecting virtual top with " + i);
     }
     //System.out.println(n);
     //System.out.println(size);
@@ -34,12 +33,12 @@ public class Percolation {
     //Connect to virtual bot
     for(int j = ((n - 1) * n + 1); j <= size; j++){
       grid.union(virtual_bot, j);
-      System.out.println("Connecting virtual bot with " + j);
+      //System.out.println("Connecting virtual bot with " + j);
     }
 
     open_site = new boolean[n][n];
 
-    System.out.println("Creating Grid Finished.");
+    //System.out.println("Creating Grid Finished.");
   }
   // create n-by-n grid, with all sites blocked
 
@@ -61,7 +60,7 @@ public class Percolation {
     if(isOpen(row - 1, col)) grid.union(pos, up);
     if(isOpen(row + 1, col)) grid.union(pos, down);
 
-    System.out.println("Opening " + row + ' ' + col);
+    //System.out.println("Opening " + row + ' ' + col);
     //Open 3 2
     //In fact open grid[2][1]
   }
@@ -106,8 +105,10 @@ public class Percolation {
 
 
 
-  public static void main(String[] args){}
-  // test client (optional)
+  public static void main(String[] args){
+    // test client (optional)
+  }
+
 
 
 }

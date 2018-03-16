@@ -3,18 +3,17 @@ import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class PercolationStats {
-  private Percolation test;
-  private int num_test;
-  private double[] test_stat;
+  private final int num_test;
+  private final double[] test_stat;
 
   public PercolationStats(int n, int trials)    // perform trials independent experiments on an n-by-n grid
   {
     num_test = trials;
     test_stat = new double[num_test];
-    
+
     for(int i = 0; i < trials; i++)
     {
-      test = new Percolation(n);
+      Percolation test = new Percolation(n);
       while(!test.percolates())
       {
         int random_row = StdRandom.uniform(1, n + 1);
@@ -45,7 +44,7 @@ public class PercolationStats {
     int n = Integer.parseInt(args[0]);
     int trials = Integer.parseInt(args[1]);
     PercolationStats ps = new PercolationStats(n, trials);
-    
+
     String confidence = ps.confidenceLo() + ", " + ps.confidenceHi();
     System.out.println("mean = " + ps.mean());
     System.out.println("StdDev = " + ps.stddev());
