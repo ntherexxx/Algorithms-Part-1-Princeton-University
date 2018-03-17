@@ -6,7 +6,7 @@ public class Percolation {
   private static final int VIRTUAL_TOP = 0;
   private final int virtualBot;
   private final int numElement;
-  private final int numOfOpenSites;
+  private int numOfOpenSites;
 
   public Percolation(int n) {
     int size = n * n;
