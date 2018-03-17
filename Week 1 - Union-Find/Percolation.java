@@ -70,10 +70,11 @@ public class Percolation {
         openSite[row - 1][col - 1] = true;
     }
     // Connect to adjacent blocks
-    if (isOpen(row, col - 1)) grid.union(pos, left);
-    if (isOpen(row, col + 1)) grid.union(pos, right);
-    if (isOpen(row - 1, col)) grid.union(pos, up);
-    if (isOpen(row + 1, col)) grid.union(pos, down);
+
+    if (col > 1 && isOpen(row, col - 1)) grid.union(pos, left);
+    if (col < numElement && isOpen(row, col + 1)) grid.union(pos, right);
+    if (row > 1 && isOpen(row - 1, col)) grid.union(pos, up);
+    if (row < numElement && isOpen(row + 1, col)) grid.union(pos, down);
 
     // System.out.println("Opening " + row + ' ' + col);
     // Open 3 2
@@ -82,10 +83,7 @@ public class Percolation {
   //  open site (row, col) if it is not open already
 
   public boolean isOpen(int row, int col) {
-    if (row <= 0 || row >= (numElement + 1) || col <= 0 || col >= (numElement + 1)) {
-      throw new IllegalArgumentException("isOpen have illegal index.");
-    }
-    else return openSite[row - 1][col - 1];
+      return openSite[row - 1][col - 1];
   }
   //  is site (row, col) open?
 

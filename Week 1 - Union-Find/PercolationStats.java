@@ -9,7 +9,7 @@ public class PercolationStats {
   public PercolationStats(int n, int trials)    // perform trials independent experiments on an n-by-n grid
   {
     if (n <= 0) throw new IllegalArgumentException("n must be greated than 0.");
-    if (trial <= 0) throw new IllegalArgumentException("trial must be greated than 0.");
+    if (trials <= 0) throw new IllegalArgumentException("trial must be greated than 0.");
 
     numTest = trials;
     testStat = new double[numTest];
