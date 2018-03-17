@@ -3,9 +3,10 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
   private final WeightedQuickUnionUF grid;
   private boolean[][] openSite;
-  private static final int virtualTop = 0;
+  private static final int VIRTUAL_TOP = 0;
   private final int virtualBot;
   private final int numElement;
+  private final int numOfOpenSites;
 
   public Percolation(int n) {
     int size = n * n;
@@ -23,7 +24,7 @@ public class Percolation {
     /*
     // Connect to virtual top
     for (int i = 1; i <=n; i++) {
-      grid.union(virtualTop, i);
+      grid.union(VIRTUAL_TOP, i);
       // System.out.println("Connecting virtual top with " + i);
     }
     // System.out.println(n);
@@ -42,16 +43,18 @@ public class Percolation {
   }
   //  create n-by-n grid, with all sites blocked
 
+  private int getIndex(int row, int col) {
+    return (row - 1) * numElement + col;
+  }
+
   public void open(int row, int col) {
-    if (row < 1 || row > numElement || col < 1 || col > numElement) 
+    if (row < 1 || row > numElement || col < 1 || col > numElement)
       throw new IllegalArgumentException("open have illegal index.");
-
-
 
     int pos = getIndex(row, col);
 
     if (row == 1) {
-      grid.union(virtualTop, pos);
+      grid.union(VIRTUAL_TOP, pos);
     }
     else if (row == numElement) {
       grid.union(virtualBot, pos);
@@ -63,6 +66,7 @@ public class Percolation {
     int right = pos + 1;
 
     openSite[row - 1][col - 1] = true;
+    numOfOpenSites++;
 
     // Connect to adjacent blocks
     if (isOpen(row, col - 1)) grid.union(pos, left);
@@ -93,37 +97,23 @@ public class Percolation {
     if (row < 0 || row > (numElement + 1) || col < 0 || col > (numElement + 1)) {
       throw new IllegalArgumentException("isFull have illegal index.");
     }
-    else return grid.connected(virtualTop, pos);
+    else return grid.connected(VIRTUAL_TOP, pos);
     // Full: connected to top row
   }
   //  is site (row, col) full?
 
 
   public int numberOfOpenSites() {
-    int count = 0;
-    int row = 1;
-
-    for (int i = 1; i <= numElement; i++) {
-      if(row > numElement) break;
-      
-      if (isOpen(row, i)) {
-        count++;
-      }
-      row++;
-    }
-
-    return count;
+    return numOfOpenSites;
   }
   //  number of open sites
 
   public boolean percolates() {
-    return grid.connected(virtualTop, virtualBot);
+    return grid.connected(VIRTUAL_TOP, virtualBot);
   }
   //  does the system percolate?
 
-  public int getIndex(int row, int col) {
-    return (row - 1) * numElement + col;
-  }
+
   public static void main(String[] args) {
     //  test client (optional)
   }
