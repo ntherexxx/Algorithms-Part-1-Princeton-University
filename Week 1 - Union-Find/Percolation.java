@@ -83,17 +83,20 @@ public class Percolation {
   //  open site (row, col) if it is not open already
 
   public boolean isOpen(int row, int col) {
+    if (row >= 1 && row <= numElement && col >= 1 && col <= numElement) {
       return openSite[row - 1][col - 1];
+    }
+    else throw new IllegalArgumentException("isOpen have illegal index.");
   }
   //  is site (row, col) open?
 
 
   public boolean isFull(int row, int col) {
     int pos = getIndex(row, col);
-    if (row <= 0 || row >= (numElement + 1) || col <= 0 || col >= (numElement + 1)) {
-      throw new IllegalArgumentException("isFull have illegal index.");
+    if (row >= 1 && row <= numElement && col >= 1 && col <= numElement) {
+      return grid.connected(VIRTUAL_TOP, pos);
     }
-    else return grid.connected(VIRTUAL_TOP, pos);
+    else throw new IllegalArgumentException("isFull have illegal index.");
     // Full: connected to top row
   }
   //  is site (row, col) full?
