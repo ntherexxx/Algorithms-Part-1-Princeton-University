@@ -1,44 +1,46 @@
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
-import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class PercolationStats {
-  private final int num_test;
-  private final double[] test_stat;
-  private static final double factor = 1.96;
+  private final int numTest;
+  private final double[] testStat;
+  private static final double FACTOR = 1.96;
 
   public PercolationStats(int n, int trials)    // perform trials independent experiments on an n-by-n grid
   {
-    num_test = trials;
-    test_stat = new double[num_test];
+    if (n <= 0) throw new IllegalArgumentException("n must be greated than 0.");
+    if (trial <= 0) throw new IllegalArgumentException("trial must be greated than 0.");
+
+    numTest = trials;
+    testStat = new double[numTest];
 
     for (int i = 0; i < trials; i++)
     {
       Percolation test = new Percolation(n);
-      while(!test.percolates())
+      while (!test.percolates())
       {
-        int random_row = StdRandom.uniform(1, n + 1);
-        int random_col = StdRandom.uniform(1, n + 1);
-        if (!test.isOpen(random_row, random_col)) {
-          test.open(random_row, random_col);
+        int randomRow = StdRandom.uniform(1, n + 1);
+        int randomCol = StdRandom.uniform(1, n + 1);
+        if (!test.isOpen(randomRow, randomCol)) {
+          test.open(randomRow, randomCol);
         }
       }
       int siteCount = test.numberOfOpenSites();
 
-      test_stat[i] = (double) siteCount/(n * n);
+      testStat[i] = (double) siteCount/(n * n);
     }
   }
   public double mean() {
-    return StdStats.mean(test_stat);
+    return StdStats.mean(testStat);
   }                          // sample mean of percolation threshold
   public double stddev() {
-    return StdStats.stddev(test_stat);
+    return StdStats.stddev(testStat);
   }                        // sample standard deviation of percolation threshold
   public double confidenceLo() {
-    return mean() - ((factor * stddev()) / Math.sqrt(num_test));
+    return mean() - ((FACTOR * stddev()) / Math.sqrt(numTest));
   }                  // low  endpoint of 95% confidence interval
   public double confidenceHi() {
-    return mean() + ((factor * stddev()) / Math.sqrt(num_test));
+    return mean() + ((FACTOR * stddev()) / Math.sqrt(numTest));
   }                  // high endpoint of 95% confidence interval
 
   public static void main(String[] args) {

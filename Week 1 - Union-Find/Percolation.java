@@ -3,10 +3,10 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
   private final WeightedQuickUnionUF grid;
   private boolean[][] openSite;
-  private static final int VIRTUAL_TOP = 0;
-  private final int virtualBot;
+  private final int VIRTUAL_BOT;
   private final int numElement;
   private int numOfOpenSites;
+  private static final int VIRTUAL_TOP = 0;
 
   public Percolation(int n) {
     int size = n * n;
@@ -19,7 +19,7 @@ public class Percolation {
     // size = 25
     numElement = n;
     grid = new WeightedQuickUnionUF(size + 2);
-    virtualBot = size + 1; //  26
+    VIRTUAL_BOT = size + 1; //  26
 
     /*
     // Connect to virtual top
@@ -32,7 +32,7 @@ public class Percolation {
     // System.out.println(((n - 1) * n + 1));
     // Connect to virtual bot
     for (int j = ((n - 1) * n + 1); j <= size; j++) {
-      grid.union(virtualBot, j);
+      grid.union(VIRTUAL_BOT, j);
       // System.out.println("Connecting virtual bot with " + j);
     }
     */
@@ -56,8 +56,8 @@ public class Percolation {
     if (row == 1) {
       grid.union(VIRTUAL_TOP, pos);
     }
-    else if (row == numElement) {
-      grid.union(virtualBot, pos);
+    if (row == numElement) {
+      grid.union(VIRTUAL_BOT, pos);
     }
 
     int up = (row - 2) * numElement + col;
@@ -65,9 +65,10 @@ public class Percolation {
     int left = pos - 1;
     int right = pos + 1;
 
-    openSite[row - 1][col - 1] = true;
-    numOfOpenSites++;
-
+    if (!openSite[row - 1][col - 1]) {
+        numOfOpenSites++;
+        openSite[row - 1][col - 1] = true;
+    }
     // Connect to adjacent blocks
     if (isOpen(row, col - 1)) grid.union(pos, left);
     if (isOpen(row, col + 1)) grid.union(pos, right);
@@ -81,20 +82,17 @@ public class Percolation {
   //  open site (row, col) if it is not open already
 
   public boolean isOpen(int row, int col) {
-    if (row < 0 || row > (numElement + 1) || col < 0 || col > (numElement + 1)) {
+    if (row <= 0 || row >= (numElement + 1) || col <= 0 || col >= (numElement + 1)) {
       throw new IllegalArgumentException("isOpen have illegal index.");
     }
-    else if (row == 0 || row == (numElement + 1) || col == 0 || col == (numElement + 1)) {
-        return false;
-    }
-    return openSite[row - 1][col - 1];
+    else return openSite[row - 1][col - 1];
   }
   //  is site (row, col) open?
 
 
   public boolean isFull(int row, int col) {
     int pos = getIndex(row, col);
-    if (row < 0 || row > (numElement + 1) || col < 0 || col > (numElement + 1)) {
+    if (row <= 0 || row >= (numElement + 1) || col <= 0 || col >= (numElement + 1)) {
       throw new IllegalArgumentException("isFull have illegal index.");
     }
     else return grid.connected(VIRTUAL_TOP, pos);
@@ -109,7 +107,7 @@ public class Percolation {
   //  number of open sites
 
   public boolean percolates() {
-    return grid.connected(VIRTUAL_TOP, virtualBot);
+    return grid.connected(VIRTUAL_TOP, VIRTUAL_BOT);
   }
   //  does the system percolate?
 
