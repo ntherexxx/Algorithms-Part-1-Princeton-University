@@ -20,6 +20,7 @@ public class Percolation {
     grid = new WeightedQuickUnionUF(size + 2);
     virtualBot = size + 1; //  26
 
+    /*
     // Connect to virtual top
     for (int i = 1; i <=n; i++) {
       grid.union(virtualTop, i);
@@ -33,6 +34,7 @@ public class Percolation {
       grid.union(virtualBot, j);
       // System.out.println("Connecting virtual bot with " + j);
     }
+    */
 
     openSite = new boolean[n][n];
 
@@ -41,9 +43,19 @@ public class Percolation {
   //  create n-by-n grid, with all sites blocked
 
   public void open(int row, int col) {
-    if (row < 1 || row > numElement || col < 1 || col > numElement) throw new IllegalArgumentException("open have illegal index.");
+    if (row < 1 || row > numElement || col < 1 || col > numElement) 
+      throw new IllegalArgumentException("open have illegal index.");
 
-    int pos = (row - 1) * numElement + col;
+
+
+    int pos = getIndex(row, col);
+
+    if (row == 1) {
+      grid.union(virtualTop, pos);
+    }
+    else if (row == numElement) {
+      grid.union(virtualBot, pos);
+    }
 
     int up = (row - 2) * numElement + col;
     int down = (row) * numElement + col;
@@ -77,7 +89,7 @@ public class Percolation {
 
 
   public boolean isFull(int row, int col) {
-    int pos = (row - 1) * numElement + col;
+    int pos = getIndex(row, col);
     if (row < 0 || row > (numElement + 1) || col < 0 || col > (numElement + 1)) {
       throw new IllegalArgumentException("isFull have illegal index.");
     }
@@ -89,11 +101,17 @@ public class Percolation {
 
   public int numberOfOpenSites() {
     int count = 0;
-    for (int i = 0; i <= numElement; i++) {
-      for (int j = 0; j <= numElement; j++) {
-        if (isOpen(i, j)) count++;
+    int row = 1;
+
+    for (int i = 1; i <= numElement; i++) {
+      if(row > numElement) break;
+      
+      if (isOpen(row, i)) {
+        count++;
       }
+      row++;
     }
+
     return count;
   }
   //  number of open sites
@@ -103,6 +121,9 @@ public class Percolation {
   }
   //  does the system percolate?
 
+  public int getIndex(int row, int col) {
+    return (row - 1) * numElement + col;
+  }
   public static void main(String[] args) {
     //  test client (optional)
   }
