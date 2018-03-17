@@ -56,6 +56,7 @@ public class Percolation {
     if (row == 1) {
       grid.union(VIRTUAL_TOP, pos);
     }
+    
     if (row == numElement) {
       grid.union(VIRTUAL_BOT, pos);
     }
