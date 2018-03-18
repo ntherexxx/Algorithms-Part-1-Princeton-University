@@ -53,8 +53,8 @@ public class PercolationStats {
     PercolationStats ps = new PercolationStats(n, trials);
 
     String confidence = ps.confidenceLo() + ", " + ps.confidenceHi();
-    StdOut.println("mean                    = " + ps.mean());
-    StdOut.println("stddev                  = " + ps.stddev());
-    StdOut.println("95% confidence interval = " + confidence);
+    System.out.println("mean                    = " + ps.mean());
+    System.out.println("stddev                  = " + ps.stddev());
+    System.out.println("95% confidence interval = " + confidence);
   }        // test client (described below)
 }
