@@ -75,7 +75,7 @@ PercolationStats:
 [WARN] PercolationStats.java:3:8: Unused import statement for 'edu.princeton.cs.algs4.WeightedQuickUnionUF'. [UnusedImports]
 [WARN] PercolationStats.java:6:21: The instance variable 'num_test' must start with a lowercase letter and use camelCase. [MemberName]
 [WARN] PercolationStats.java:7:26: The instance variable 'test_stat' must start with a lowercase letter and use camelCase. [MemberName]
-[WARN] PercolationStats.java:14:8: 'for' is not followed by whitespace. [WhitespaceAfter]
+[WARN] PercolationStats.java:14:8: 'for' is not followed by whitespace. [WhitespaceAfter] 
 [WARN] PercolationStats.java:17:12: 'while' is not followed by whitespace. [WhitespaceAfter]
 [WARN] PercolationStats.java:19:13: The local variable 'random_row' must start with a lowercase letter and use camelCase. [LocalVariableName]
 [WARN] PercolationStats.java:20:13: The local variable 'random_col' must start with a lowercase letter and use camelCase. [LocalVariableName]
