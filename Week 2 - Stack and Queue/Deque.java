@@ -2,7 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
-	private final int n; // size of deque
+	private int n; // size of deque
 
 	private class Node
 	{
