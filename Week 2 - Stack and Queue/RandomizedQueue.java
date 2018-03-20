@@ -24,9 +24,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public void enqueue(Item item) {
         if (item == null)
             throw new IllegalArgumentException("enqueue item is null");
-        
-        s[n++] = item;
-        
+
+        s[n] = item;
+        n++;
         if (n == capacity) {
             capacity = capacity * 2;
             Item[] tmp = (Item[]) new Object[capacity];
@@ -38,7 +38,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             }
             s = tmp;
         }
-        
     }          
     // add the item
     public Item dequeue() {
@@ -69,6 +68,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }                   
     // remove and return a random item
     public Item sample() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("dequeue has empty array");
+        }
         int index = StdRandom.uniform(n);
         Item tmpItem = s[index];
         while (tmpItem == null) {
@@ -92,7 +94,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         
         public Item next() {
-            if (n == 0) throw new NoSuchElementException("next has no element");
+            if (!hasNext()) throw new NoSuchElementException("next has no element");
+                
             int index = StdRandom.uniform(n);
             Item tmpItem = s[index];
             while (tmpItem == null) {

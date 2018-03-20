@@ -30,7 +30,7 @@ public class Deque<Item> implements Iterable<Item> {
     {
         // Check if item is null
         if (item == null)
-            throw new java.lang.NullPointerException("add first have null item");
+            throw new java.lang.IllegalArgumentException("add first have null item");
         
         // Case 1: many elements
         Node tmp = first;
@@ -49,7 +49,7 @@ public class Deque<Item> implements Iterable<Item> {
     public void addLast(Item item)
     {
         if (item == null)
-            throw new java.lang.NullPointerException("add last have null item");
+            throw new java.lang.IllegalArgumentException("add last have null item");
         
         Node tmp = last;
         last = new Node();
