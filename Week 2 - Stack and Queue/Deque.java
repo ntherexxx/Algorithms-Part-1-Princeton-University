@@ -5,7 +5,7 @@ public class Deque<Item> implements Iterable<Item> {
     private int n; // size of deque
     private Node first;
     private Node last;
-    
+    @SuppressWarnings("unchecked")
     private class Node
     {
         private Item item;

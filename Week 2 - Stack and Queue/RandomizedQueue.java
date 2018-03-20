@@ -6,7 +6,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int capacity; // Array Capacity
     private int n; // Number of Element in Array
     private Item[] s;
-    
+    @SuppressWarnings("unchecked")
     public RandomizedQueue() {
         n = 0;
         capacity = 1;
@@ -92,7 +92,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         
         public Item next() {
-            if (!hasNext()) throw new NoSuchElementException("next has no element");
+            if (n == 0) throw new NoSuchElementException("next has no element");
             int index = StdRandom.uniform(n);
             Item tmpItem = s[index];
             while (tmpItem == null) {
