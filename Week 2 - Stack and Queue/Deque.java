@@ -3,6 +3,8 @@ import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
     private int n; // size of deque
+    private Node first;
+    private Node last;
     
     private class Node
     {
@@ -10,10 +12,6 @@ public class Deque<Item> implements Iterable<Item> {
         private Node next;
         private Node prev;
     }
-    
-    private Node first;
-    private Node last;
-    
     public Deque()
     {
         n = 0;
@@ -68,7 +66,7 @@ public class Deque<Item> implements Iterable<Item> {
     {
         // Case 1: No element
         if (isEmpty())
-            throw new java.util.NoSuchElementException("removeFirst has no element");
+            throw new NoSuchElementException("removeFirst has no element");
         
         
         Item tmpItem = first.item;
@@ -88,7 +86,7 @@ public class Deque<Item> implements Iterable<Item> {
     {
         // Case 1: No element
         if (isEmpty())
-            throw new java.util.NoSuchElementException("removeLast has no element");
+            throw new NoSuchElementException("removeLast has no element");
         
         Item tmpItem = last.item;
         last = last.prev;
@@ -134,6 +132,6 @@ public class Deque<Item> implements Iterable<Item> {
     
     public static void main(String[] args)
     {
-        //nothing
+        // nothing
     }   // unit testing (optional)
 }

@@ -1,0 +1,1527 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED (0 errors, 3 warnings)
+API:          PASSED
+
+Findbugs:     FAILED (1 warning)
+PMD:          PASSED
+Checkstyle:   FAILED (0 errors, 2 warnings)
+
+Correctness:  16/43 tests passed
+Memory:       100/105 tests passed
+Timing:       63/136 tests passed
+
+Aggregate score: 51.11%
+[Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+1.5K Mar 20 19:04 Deque$ListIterator.class
+1.1K Mar 20 19:04 Deque$Node.class
+3.0K Mar 20 19:04 Deque.class
+3.7K Mar 20 19:04 Deque.java
+1.3K Mar 20 19:04 Permutation.class
+ 563 Mar 20 19:04 Permutation.java
+ 508 Mar 20 19:04 README.md
+1.4K Mar 20 19:04 RandomizedQueue$ListIterator.class
+2.8K Mar 20 19:04 RandomizedQueue.class
+3.4K Mar 20 19:04 RandomizedQueue.java
+5.4M Mar 20 19:04 Week\ 2\ -\ Stack\ and\ Queue.pdf
+  17 Mar 20 19:04 distinct.txt
+  24 Mar 20 19:04 duplicates.txt
+ 106 Mar 20 19:04 mediumTale.txt
+  21 Mar 20 19:04 permutation10.txt
+   8 Mar 20 19:04 permutation4.txt
+  10 Mar 20 19:04 permutation5.txt
+  12 Mar 20 19:04 permutation6.txt
+  16 Mar 20 19:04 permutation8.txt
+761K Mar 20 19:04 tale.txt
+  50 Mar 20 19:04 tinyTale.txt
+
+
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac Deque.java
+*-----------------------------------------------------------
+
+% javac RandomizedQueue.java
+*-----------------------------------------------------------
+RandomizedQueue.java:13: warning: [unchecked] unchecked cast
+        s = (Item[]) new Object[capacity];
+                     ^
+  required: Item[]
+  found:    Object[]
+  where Item is a type-variable:
+    Item extends Object declared in class RandomizedQueue
+RandomizedQueue.java:32: warning: [unchecked] unchecked cast
+            Item[] tmp = (Item[]) new Object[capacity];
+                                  ^
+  required: Item[]
+  found:    Object[]
+  where Item is a type-variable:
+    Item extends Object declared in class RandomizedQueue
+RandomizedQueue.java:65: warning: [unchecked] unchecked cast
+            Item[] tmp = (Item[]) new Object[capacity];
+                                  ^
+  required: Item[]
+  found:    Object[]
+  where Item is a type-variable:
+    Item extends Object declared in class RandomizedQueue
+3 warnings
+
+% javac Permutation.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+Deque:
+
+RandomizedQueue:
+
+Permutation:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS                                       
+********************************************************************************
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+M B IT_NO_SUCH_ELEMENT It: The 'next()' method must throw a 'java.util.NoSuchElementException' if it is called when there are no more elements to return.  At RandomizedQueue.java:[lines 102-108]
+Warnings generated: 1
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+Deque.java:14: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+Deque.java:15: Instance (and static) variables should be declared at the top of the class, before any method declarations, constructors, or nested classes. [FieldDeclarationsShouldBeAtStartOfClass]
+Deque.java:71: Unnecessary use of fully qualified name 'java.util.NoSuchElementException' due to existing import 'java.util.NoSuchElementException'. [UnnecessaryFullyQualifiedName]
+Deque.java:91: Unnecessary use of fully qualified name 'java.util.NoSuchElementException' due to existing import 'java.util.NoSuchElementException'. [UnnecessaryFullyQualifiedName]
+PMD ends with 4 warnings.
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] Deque.java:137:11: '//' or '/*' is not followed by whitespace. [WhitespaceAfter]
+[WARN] RandomizedQueue.java:7:17: The instance variable 'N' must start with a lowercase letter and use camelCase. [MemberName]
+Checkstyle ends with 0 errors and 2 warnings.
+
+% custom checkstyle checks for Deque.java
+*-----------------------------------------------------------
+
+% custom checkstyle checks for RandomizedQueue.java
+*-----------------------------------------------------------
+
+% custom checkstyle checks for Permutation.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+********************************************************************************
+*  TESTING CORRECTNESS
+********************************************************************************
+
+Testing correctness of Deque
+*-----------------------------------------------------------
+Running 16 total tests.
+
+Tests 1-6 make random calls to addFirst(), addLast(), removeFirst(),
+removeLast(), isEmpty(), and size(). The probabilities of each
+operation are (p1, p2, p3, p4, p5, p6), respectively.
+
+Test 1: check random calls to addFirst(), addLast(), and size()
+  *    5 random calls (0.4, 0.4, 0.0, 0.0, 0.0, 0.2)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test1(TestDeque.java:441)
+    TestDeque.main(TestDeque.java:829)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.addLast(1)
+
+  *   50 random calls (0.4, 0.4, 0.0, 0.0, 0.0, 0.2)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test1(TestDeque.java:442)
+    TestDeque.main(TestDeque.java:829)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.size()            ==> 1
+         deque.addLast(2)
+
+  *  500 random calls (0.4, 0.4, 0.0, 0.0, 0.0, 0.2)
+  * 1000 random calls (0.4, 0.4, 0.0, 0.0, 0.0, 0.2)
+==> FAILED
+
+Test 2: check random calls to addFirst(), removeFirst(), and isEmpty()
+  *    5 random calls (0.8, 0.0, 0.1, 0.0, 0.1, 0.0)
+  *   50 random calls (0.8, 0.0, 0.1, 0.0, 0.1, 0.0)
+  *  500 random calls (0.8, 0.0, 0.1, 0.0, 0.1, 0.0)
+  * 1000 random calls (0.8, 0.0, 0.1, 0.0, 0.1, 0.0)
+  *    5 random calls (0.1, 0.0, 0.8, 0.0, 0.1, 0.0)
+  *   50 random calls (0.1, 0.0, 0.8, 0.0, 0.1, 0.0)
+  *  500 random calls (0.1, 0.0, 0.8, 0.0, 0.1, 0.0)
+  * 1000 random calls (0.1, 0.0, 0.8, 0.0, 0.1, 0.0)
+==> passed
+
+Test 3: check random calls to addFirst(), removeLast(), and isEmpty()
+  *    5 random calls (0.8, 0.0, 0.0, 0.1, 0.1, 0.0)
+  *   50 random calls (0.8, 0.0, 0.0, 0.1, 0.1, 0.0)
+  *  500 random calls (0.8, 0.0, 0.0, 0.1, 0.1, 0.0)
+  * 1000 random calls (0.8, 0.0, 0.0, 0.1, 0.1, 0.0)
+  *    5 random calls (0.1, 0.0, 0.0, 0.8, 0.1, 0.0)
+  *   50 random calls (0.1, 0.0, 0.0, 0.8, 0.1, 0.0)
+  *  500 random calls (0.1, 0.0, 0.0, 0.8, 0.1, 0.0)
+  * 1000 random calls (0.1, 0.0, 0.0, 0.8, 0.1, 0.0)
+==> passed
+
+Test 4: check random calls to addLast(), removeLast(), and isEmpty()
+  *    5 random calls (0.0, 0.8, 0.0, 0.1, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test4(TestDeque.java:485)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.addLast(1)
+
+  *   50 random calls (0.0, 0.8, 0.0, 0.1, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test4(TestDeque.java:486)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.isEmpty()         ==> false
+         deque.isEmpty()         ==> false
+         deque.addLast(3)
+
+  *  500 random calls (0.0, 0.8, 0.0, 0.1, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test4(TestDeque.java:487)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.addLast(1)
+
+  * 1000 random calls (0.0, 0.8, 0.0, 0.1, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test4(TestDeque.java:488)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.addLast(1)
+
+  *    5 random calls (0.0, 0.1, 0.0, 0.8, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeLast(Deque.java:93)
+    TestDeque.random(TestDeque.java:106)
+    TestDeque.test4(TestDeque.java:489)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.isEmpty()         ==> true
+         deque.isEmpty()         ==> true
+         deque.addLast(2)
+         deque.removeLast()
+
+  *   50 random calls (0.0, 0.1, 0.0, 0.8, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeLast(Deque.java:93)
+    TestDeque.random(TestDeque.java:106)
+    TestDeque.test4(TestDeque.java:490)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.removeLast()
+
+  *  500 random calls (0.0, 0.1, 0.0, 0.8, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeLast(Deque.java:93)
+    TestDeque.random(TestDeque.java:106)
+    TestDeque.test4(TestDeque.java:491)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.isEmpty()         ==> true
+         deque.isEmpty()         ==> true
+         deque.isEmpty()         ==> true
+         deque.addLast(3)
+         deque.removeLast()
+
+  * 1000 random calls (0.0, 0.1, 0.0, 0.8, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeLast(Deque.java:93)
+    TestDeque.random(TestDeque.java:106)
+    TestDeque.test4(TestDeque.java:492)
+    TestDeque.main(TestDeque.java:832)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.removeLast()
+
+==> FAILED
+
+Test 5: check random calls to addLast(), removeFirst(), and isEmpty()
+  *    5 random calls (0.0, 0.8, 0.1, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test5(TestDeque.java:501)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.isEmpty()         ==> false
+         deque.addLast(2)
+
+  *   50 random calls (0.0, 0.8, 0.1, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test5(TestDeque.java:502)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.addLast(1)
+
+  *  500 random calls (0.0, 0.8, 0.1, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test5(TestDeque.java:503)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.addLast(1)
+
+  * 1000 random calls (0.0, 0.8, 0.1, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.random(TestDeque.java:77)
+    TestDeque.test5(TestDeque.java:504)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.addLast(1)
+
+  *    5 random calls (0.0, 0.1, 0.8, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeFirst(Deque.java:74)
+    TestDeque.random(TestDeque.java:87)
+    TestDeque.test5(TestDeque.java:505)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.isEmpty()         ==> false
+         deque.removeFirst()
+
+  *   50 random calls (0.0, 0.1, 0.8, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeFirst(Deque.java:74)
+    TestDeque.random(TestDeque.java:87)
+    TestDeque.test5(TestDeque.java:506)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.isEmpty()         ==> true
+         deque.isEmpty()         ==> true
+         deque.addLast(2)
+         deque.removeFirst()
+
+  *  500 random calls (0.0, 0.1, 0.8, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeFirst(Deque.java:74)
+    TestDeque.random(TestDeque.java:87)
+    TestDeque.test5(TestDeque.java:507)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.removeFirst()
+
+  * 1000 random calls (0.0, 0.1, 0.8, 0.0, 0.1, 0.0)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeFirst(Deque.java:74)
+    TestDeque.random(TestDeque.java:87)
+    TestDeque.test5(TestDeque.java:508)
+    TestDeque.main(TestDeque.java:833)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.removeFirst()
+
+==> FAILED
+
+Test 6: check random calls to addFirst(), addLast(), removeFirst(),
+        removeLast(), isEmpty(), and size()
+  *    5 random calls (0.3, 0.3, 0.1, 0.1, 0.1, 0.1)
+  *   50 random calls (0.3, 0.3, 0.1, 0.1, 0.1, 0.1)
+  *  500 random calls (0.3, 0.3, 0.1, 0.1, 0.1, 0.1)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeFirst(Deque.java:74)
+    TestDeque.random(TestDeque.java:87)
+    TestDeque.test6(TestDeque.java:521)
+    TestDeque.main(TestDeque.java:834)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addLast(0)
+         deque.removeFirst()
+
+  * 1000 random calls (0.3, 0.3, 0.1, 0.1, 0.1, 0.1)
+  *    5 random calls (0.1, 0.1, 0.3, 0.3, 0.1, 0.1)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeLast(Deque.java:93)
+    TestDeque.random(TestDeque.java:106)
+    TestDeque.test6(TestDeque.java:523)
+    TestDeque.main(TestDeque.java:834)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.isEmpty()         ==> true
+         deque.addLast(1)
+         deque.removeLast()
+
+  *   50 random calls (0.1, 0.1, 0.3, 0.3, 0.1, 0.1)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeLast(Deque.java:93)
+    TestDeque.random(TestDeque.java:106)
+    TestDeque.test6(TestDeque.java:524)
+    TestDeque.main(TestDeque.java:834)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addFirst(0)
+         deque.removeFirst()     ==> 0
+         deque.addFirst(2)
+         deque.removeLast()      ==> 2
+         deque.addLast(4)
+         deque.removeLast()
+
+  *  500 random calls (0.1, 0.1, 0.3, 0.3, 0.1, 0.1)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeFirst(Deque.java:74)
+    TestDeque.random(TestDeque.java:87)
+    TestDeque.test6(TestDeque.java:525)
+    TestDeque.main(TestDeque.java:834)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.size()            ==> 0
+         deque.size()            ==> 0
+         deque.size()            ==> 0
+         deque.isEmpty()         ==> true
+         deque.addLast(4)
+         deque.removeFirst()
+
+  * 1000 random calls (0.1, 0.1, 0.3, 0.3, 0.1, 0.1)
+    java.lang.NullPointerException
+
+    Deque$Node.access$100(Deque.java:7)
+    Deque.removeFirst(Deque.java:74)
+    TestDeque.random(TestDeque.java:87)
+    TestDeque.test6(TestDeque.java:526)
+    TestDeque.main(TestDeque.java:834)
+
+    - sequence of operations was:
+         Deque<Integer> deque = new Deque<Integer>()
+         deque.addFirst(0)
+         deque.removeLast()      ==> 0
+         deque.addLast(2)
+         deque.removeFirst()
+
+==> FAILED
+
+Test 7: check removeFirst() and removeLast() from an empty deque
+  * removeFirst()
+  * removeLast()
+==> passed
+
+Test 8: check whether two Deque objects can be created at the same time
+==> passed
+
+Test 9: check iterator() after n calls to addFirst()
+  * n = 10
+    - number of student   entries = 9
+    - number of reference entries = 10
+
+  * n = 50
+    - number of student   entries = 49
+    - number of reference entries = 50
+
+==> FAILED
+
+Test 10: check iterator() after each of m intermixed calls to
+         addFirst(), addLast(), removeFirst(), and removeLast()
+  * m = 20
+    - number of student   entries = 0
+    - number of reference entries = 1
+    - iterator failed after applying operation 1
+    - sequence of operations was:
+         Deque deque<Integer> = new Deque<Integer>()
+         deque.addFirst(1)
+
+  * m = 50
+    java.lang.NullPointerException
+
+    Deque$Node.access$200(Deque.java:7)
+    Deque$ListIterator.hasNext(Deque.java:113)
+    SafeIterable$SafeIterator.hasNext(SafeIterable.java:54)
+    UtilCOS.compareAsSequences(UtilCOS.java:698)
+    UtilCOS.compareAsSequences(UtilCOS.java:691)
+    TestDeque.checkIteratorAfterIntermixedOperations(TestDeque.java:276)
+    TestDeque.test10(TestDeque.java:610)
+    TestDeque.main(TestDeque.java:838)
+
+    - sequence of operations was:
+         Deque deque<Integer> = new Deque<Integer>()
+         deque.addLast(1)
+
+  * m = 100
+    java.lang.NullPointerException
+
+    Deque$Node.access$200(Deque.java:7)
+    Deque$ListIterator.hasNext(Deque.java:113)
+    SafeIterable$SafeIterator.hasNext(SafeIterable.java:54)
+    UtilCOS.compareAsSequences(UtilCOS.java:698)
+    UtilCOS.compareAsSequences(UtilCOS.java:691)
+    TestDeque.checkIteratorAfterIntermixedOperations(TestDeque.java:276)
+    TestDeque.test10(TestDeque.java:611)
+    TestDeque.main(TestDeque.java:838)
+
+    - sequence of operations was:
+         Deque deque<Integer> = new Deque<Integer>()
+         deque.addLast(1)
+
+  * m = 1000
+    java.lang.NullPointerException
+
+    Deque$Node.access$200(Deque.java:7)
+    Deque$ListIterator.hasNext(Deque.java:113)
+    SafeIterable$SafeIterator.hasNext(SafeIterable.java:54)
+    UtilCOS.compareAsSequences(UtilCOS.java:698)
+    UtilCOS.compareAsSequences(UtilCOS.java:691)
+    TestDeque.checkIteratorAfterIntermixedOperations(TestDeque.java:276)
+    TestDeque.test10(TestDeque.java:612)
+    TestDeque.main(TestDeque.java:838)
+
+    - sequence of operations was:
+         Deque deque<Integer> = new Deque<Integer>()
+         deque.addLast(1)
+
+==> FAILED
+
+Test 11: create two nested iterators to same deque
+  * n = 10
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.twoNestedIterators(TestDeque.java:300)
+    TestDeque.test11(TestDeque.java:619)
+    TestDeque.main(TestDeque.java:839)
+
+==> FAILED
+
+  * n = 50
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.twoNestedIterators(TestDeque.java:300)
+    TestDeque.test11(TestDeque.java:620)
+    TestDeque.main(TestDeque.java:839)
+
+==> FAILED
+
+==> FAILED
+
+Test 12: create two parallel iterators to same deque
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.twoParallelIterators(TestDeque.java:368)
+    TestDeque.test12(TestDeque.java:627)
+    TestDeque.main(TestDeque.java:840)
+
+==> FAILED
+
+    java.lang.NullPointerException
+
+    Deque$Node.access$202(Deque.java:7)
+    Deque.addLast(Deque.java:65)
+    TestDeque.twoParallelIterators(TestDeque.java:368)
+    TestDeque.test12(TestDeque.java:628)
+    TestDeque.main(TestDeque.java:840)
+
+==> FAILED
+
+==> FAILED
+
+Test 13: create Deque objects of different parameterized types
+==> passed
+
+Test 14: call addFirst() and addLast() with null argument
+    - throws wrong exception when calling addFirst() with a null argument
+    - throws a java.lang.NullPointerException
+    - should throw a java.lang.IllegalArgumentException
+
+    - throws wrong exception when calling addLast() with a null argument
+    - throws a java.lang.NullPointerException
+    - should throw a java.lang.IllegalArgumentException
+
+==> FAILED
+
+Test 15: check that remove() and next() throw the specified exceptions in iterator()
+    - failed trying to call next() twice on an iterator with two items
+
+    java.util.NoSuchElementException: next cannot be performed.
+
+    Deque$ListIterator.next(Deque.java:122)
+    TestDeque.test15(TestDeque.java:762)
+    TestDeque.main(TestDeque.java:843)
+
+==> FAILED
+
+Test 16: call iterator() when the deque is empty
+    java.lang.NullPointerException
+
+    Deque$Node.access$200(Deque.java:7)
+    Deque$ListIterator.hasNext(Deque.java:113)
+    TestDeque.test16(TestDeque.java:802)
+    TestDeque.main(TestDeque.java:844)
+
+==> FAILED
+
+
+Total: 5/16 tests passed!
+
+
+================================================================
+Testing correctness of RandomizedQueue
+*-----------------------------------------------------------
+Running 18 total tests.
+
+Tests 1-4 make random calls to enqueue(), dequeue(), sample(),
+isEmpty(), and size(). The probabilities of each operation are
+(p1, p2, p3, p4, p5), respectively.
+
+Test 1: check random calls to enqueue() and size()
+  *    5 random calls (0.8, 0.0, 0.0, 0.0, 0.2)
+  *   50 random calls (0.8, 0.0, 0.0, 0.0, 0.2)
+  *  500 random calls (0.8, 0.0, 0.0, 0.0, 0.2)
+  * 1000 random calls (0.8, 0.0, 0.0, 0.0, 0.2)
+==> passed
+
+Test 2: check random calls to enqueue() and dequeue()
+  *    5 random calls (0.7, 0.1, 0.0, 0.1, 0.1)
+  *   50 random calls (0.7, 0.1, 0.0, 0.1, 0.1)
+  *  500 random calls (0.7, 0.1, 0.0, 0.1, 0.1)
+  * 1000 random calls (0.7, 0.1, 0.0, 0.1, 0.1)
+  *    5 random calls (0.1, 0.7, 0.0, 0.1, 0.1)
+  *   50 random calls (0.1, 0.7, 0.0, 0.1, 0.1)
+  *  500 random calls (0.1, 0.7, 0.0, 0.1, 0.1)
+  * 1000 random calls (0.1, 0.7, 0.0, 0.1, 0.1)
+==> passed
+
+Test 3: check random calls to enqueue(), sample(), and size()
+  *    5 random calls (0.8, 0.0, 0.1, 0.0, 0.1)
+  *   50 random calls (0.8, 0.0, 0.1, 0.0, 0.1)
+  *  500 random calls (0.8, 0.0, 0.1, 0.0, 0.1)
+  * 1000 random calls (0.8, 0.0, 0.1, 0.0, 0.1)
+  *    5 random calls (0.1, 0.0, 0.8, 0.0, 0.1)
+  *   50 random calls (0.1, 0.0, 0.8, 0.0, 0.1)
+  *  500 random calls (0.1, 0.0, 0.8, 0.0, 0.1)
+  * 1000 random calls (0.1, 0.0, 0.8, 0.0, 0.1)
+==> passed
+
+Test 4: check random calls to enqueue(), dequeue(), sample(), isEmpty(), and size()
+  *    5 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
+  *   50 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
+  *  500 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
+  * 1000 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
+  *    5 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
+  *   50 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
+  *  500 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
+  * 1000 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
+==> passed
+
+Test 5: call dequeue() and sample() from an empty randomized queue
+  * dequeue()
+  * sample()
+     java.util.NoSuchElementException not thrown
+==> FAILED
+
+Test 6: create multiple randomized queue objects at the same time
+  * n = 10
+  * n = 100
+==> passed
+
+Test 7: check that iterator() returns correct items after a sequence
+        of n enqueue() operations
+  * n = 10
+    
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        OperationCountLimitExceededException
+        Number of calls to next() and hasNext() exceeds limit: 10000000
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+  * n = 50
+    
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        OperationCountLimitExceededException
+        Number of calls to next() and hasNext() exceeds limit: 10000000
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+==> FAILED
+
+Test 8: check that iterator() returns correct items after sequence
+        of m enqueue() and dequeue() operations
+  * m = 10
+  * m = 1000
+    
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        OperationCountLimitExceededException
+        Number of calls to next() and hasNext() exceeds limit: 10000000
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+==> FAILED
+
+Test 9: create two nested iterators over the same randomized queue
+  * n = 10
+    - inner iterator returned more than 10 items
+
+  * n = 50
+    - inner iterator returned more than 50 items
+
+==> FAILED
+
+Test 10: create two parallel iterators over the same randomized queue
+  * n = 10
+    - student   iterator 1 hasNext() = true
+    - student   iterator 2 hasNext() = true
+    - reference iterator   hasNext() = false
+
+  * n = 50
+    - student   iterator 1 hasNext() = true
+    - student   iterator 2 hasNext() = true
+    - reference iterator   hasNext() = false
+
+==> FAILED
+
+Test 11: create two iterators over different randomized queues
+    
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        OperationCountLimitExceededException
+        Number of calls to next() and hasNext() exceeds limit: 10000000
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+==> FAILED
+
+Test 12: create RandomizedQueue objects of different parameterized types
+==> passed
+
+Test 13: check randomness of sample() by enqueueing n items, repeatedly calling
+         sample(), and counting the frequency of each item
+  * n = 3, trials = 12000
+  * n = 5, trials = 12000
+  * n = 8, trials = 12000
+  * n = 10, trials = 12000
+==> passed
+
+Test 14: check randomness of dequeue() by enqueueing n items, dequeueing n items,
+         and seeing whether each of the n! permutations is equally likely
+  * n = 2, trials = 12000
+  * n = 3, trials = 12000
+  * n = 4, trials = 12000
+  * n = 5, trials = 12000
+==> passed
+
+Test 15: check randomness of iterator() by enqueueing n items, iterating over those
+         n items, and seeing whether each of the n! permutations is equally likely
+  * n = 2, trials = 12000
+    - iterator() returns the same item more than once
+    - but no duplicate items were added to randomized queue
+    - failed on operation 1 of 12000
+
+  * n = 3, trials = 12000
+    - iterator() returns the same item more than once
+    - but no duplicate items were added to randomized queue
+    - failed on operation 1 of 12000
+
+  * n = 4, trials = 12000
+    - iterator() returns the same item more than once
+    - but no duplicate items were added to randomized queue
+    - failed on operation 1 of 12000
+
+  * n = 5, trials = 12000
+    - iterator() returns the same item more than once
+    - but no duplicate items were added to randomized queue
+    - failed on operation 1 of 12000
+
+==> FAILED
+
+Test 16: call enqueue() with a null argument
+==> passed
+
+Test 17: check that remove() and next() throw the specified exceptions in iterator()
+    - fails to throw an exception when calling next() when iterator is exhausted
+
+==> FAILED
+
+Test 18: call iterator() when randomized queue is empty
+==> passed
+
+
+Total: 10/18 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TESTING CORRECTNESS (substituting reference RandomizedQueue and Deque)
+********************************************************************************
+
+Testing correctness of Permutation
+*-----------------------------------------------------------
+Tests 1-5 call the main() function directly, resetting standard input
+before each call.
+
+Running 9 total tests.
+
+Test 1a: check formatting for sample inputs from assignment specification
+  % java Permutation 3 < distinct.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    TestPermutation.checkFormatting(TestPermutation.java:40)
+    TestPermutation.test1a(TestPermutation.java:206)
+    TestPermutation.main(TestPermutation.java:316)
+
+    - student solution threw an exception
+    - reference solution did not throw an exception
+
+  % java Permutation 3 < distinct.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    TestPermutation.checkFormatting(TestPermutation.java:40)
+    TestPermutation.test1a(TestPermutation.java:207)
+    TestPermutation.main(TestPermutation.java:316)
+
+    - student solution threw an exception
+    - reference solution did not throw an exception
+
+  % java Permutation 8 < duplicates.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    TestPermutation.checkFormatting(TestPermutation.java:40)
+    TestPermutation.test1a(TestPermutation.java:208)
+    TestPermutation.main(TestPermutation.java:316)
+
+    - student solution threw an exception
+    - reference solution did not throw an exception
+
+==> FAILED
+
+Test 1b: check formatting for other inputs
+  % java Permutation 8 < mediumTale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    TestPermutation.checkFormatting(TestPermutation.java:40)
+    TestPermutation.test1b(TestPermutation.java:214)
+    TestPermutation.main(TestPermutation.java:319)
+
+    - student solution threw an exception
+    - reference solution did not throw an exception
+
+  % java Permutation 0 < distinct.txt
+  [no output]
+
+==> FAILED
+
+Test 2: check that main() reads all data from standard input
+  * filename = distinct.txt, k = 3
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    UtilCOS.consumesStdIn(UtilCOS.java:178)
+    TestPermutation.checkConsumesStdIn(TestPermutation.java:52)
+    TestPermutation.test2(TestPermutation.java:221)
+    TestPermutation.main(TestPermutation.java:322)
+
+  * filename = distinct.txt, k = 3
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    UtilCOS.consumesStdIn(UtilCOS.java:178)
+    TestPermutation.checkConsumesStdIn(TestPermutation.java:52)
+    TestPermutation.test2(TestPermutation.java:222)
+    TestPermutation.main(TestPermutation.java:322)
+
+  * filename = duplicates.txt, k = 8
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    UtilCOS.consumesStdIn(UtilCOS.java:178)
+    TestPermutation.checkConsumesStdIn(TestPermutation.java:52)
+    TestPermutation.test2(TestPermutation.java:223)
+    TestPermutation.main(TestPermutation.java:322)
+
+  * filename = mediumTale.txt, k = 8
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    UtilCOS.consumesStdIn(UtilCOS.java:178)
+    TestPermutation.checkConsumesStdIn(TestPermutation.java:52)
+    TestPermutation.test2(TestPermutation.java:224)
+    TestPermutation.main(TestPermutation.java:322)
+
+==> FAILED
+
+Test 3a: check that main() prints each item from the sequence at most once
+         (for inputs with no duplicate strings)
+  * filename = distinct.txt, k = 3
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3a(TestPermutation.java:232)
+    TestPermutation.main(TestPermutation.java:325)
+
+  * filename = distinct.txt, k = 1
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3a(TestPermutation.java:233)
+    TestPermutation.main(TestPermutation.java:325)
+
+  * filename = distinct.txt, k = 9
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3a(TestPermutation.java:234)
+    TestPermutation.main(TestPermutation.java:325)
+
+  * filename = permutation6.txt, k = 6
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3a(TestPermutation.java:235)
+    TestPermutation.main(TestPermutation.java:325)
+
+  * filename = permutation10.txt, k = 10
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3a(TestPermutation.java:236)
+    TestPermutation.main(TestPermutation.java:325)
+
+==> FAILED
+
+Test 3b: check that main() prints each item from the sequence at most once
+         (for inputs with duplicate strings)
+  * filename = duplicates.txt, k = 8
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3b(TestPermutation.java:244)
+    TestPermutation.main(TestPermutation.java:328)
+
+  * filename = duplicates.txt, k = 3
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3b(TestPermutation.java:245)
+    TestPermutation.main(TestPermutation.java:328)
+
+  * filename = permutation8.txt, k = 6
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3b(TestPermutation.java:246)
+    TestPermutation.main(TestPermutation.java:328)
+
+  * filename = permutation8.txt, k = 2
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3b(TestPermutation.java:247)
+    TestPermutation.main(TestPermutation.java:328)
+
+  * filename = tinyTale.txt, k = 10
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3b(TestPermutation.java:248)
+    TestPermutation.main(TestPermutation.java:328)
+
+==> FAILED
+
+Test 3c: check that main() prints each item from the sequence at most once
+         (for inputs with newlines)
+  * filename = mediumTale.txt, k = 10
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3c(TestPermutation.java:256)
+    TestPermutation.main(TestPermutation.java:331)
+
+  * filename = mediumTale.txt, k = 20
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3c(TestPermutation.java:257)
+    TestPermutation.main(TestPermutation.java:331)
+
+  * filename = tale.txt, k = 10
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3c(TestPermutation.java:259)
+    TestPermutation.main(TestPermutation.java:331)
+
+  * filename = tale.txt, k = 50
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkStringFrequencies(TestPermutation.java:74)
+    TestPermutation.test3c(TestPermutation.java:260)
+    TestPermutation.main(TestPermutation.java:331)
+
+==> FAILED
+
+Test 4: check main() when k = 0
+  * filename = distinct.txt, k = 0
+  * filename = distinct.txt, k = 0
+==> passed
+
+Test 5a: check that permutations are uniformly random
+         (for inputs with no duplicate strings)
+  * filename = permutation4.txt, k = 1
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5a(TestPermutation.java:278)
+    TestPermutation.main(TestPermutation.java:337)
+
+  * filename = permutation4.txt, k = 2
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5a(TestPermutation.java:279)
+    TestPermutation.main(TestPermutation.java:337)
+
+  * filename = permutation4.txt, k = 3
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5a(TestPermutation.java:280)
+    TestPermutation.main(TestPermutation.java:337)
+
+  * filename = permutation4.txt, k = 4
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5a(TestPermutation.java:281)
+    TestPermutation.main(TestPermutation.java:337)
+
+  * filename = permutation6.txt, k = 2
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5a(TestPermutation.java:282)
+    TestPermutation.main(TestPermutation.java:337)
+
+==> FAILED
+
+Test 5b: check that permutations are uniformly random
+         (for inputs with duplicate strings)
+  * filename = permutation5.txt, k = 1
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5b(TestPermutation.java:290)
+    TestPermutation.main(TestPermutation.java:340)
+
+  * filename = permutation5.txt, k = 2
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5b(TestPermutation.java:291)
+    TestPermutation.main(TestPermutation.java:340)
+
+  * filename = permutation5.txt, k = 3
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5b(TestPermutation.java:292)
+    TestPermutation.main(TestPermutation.java:340)
+
+  * filename = duplicates.txt, k = 3
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5b(TestPermutation.java:293)
+    TestPermutation.main(TestPermutation.java:340)
+
+  * filename = permutation8.txt, k = 2
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TestPermutation.checkRandomnessOfPermutation(TestPermutation.java:161)
+    TestPermutation.test5b(TestPermutation.java:294)
+    TestPermutation.main(TestPermutation.java:340)
+
+==> FAILED
+
+Total: 1/9 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TIMING (substituting reference RandomizedQueue and Deque)
+********************************************************************************
+
+Timing Permutation
+*-----------------------------------------------------------
+Running 23 total tests.
+
+Test 1: count calls to methods in StdIn
+  * java Permutation 5 < distinct.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdIn(TimePermutation.java:61)
+    TimePermutation.test1(TimePermutation.java:303)
+    TimePermutation.main(TimePermutation.java:358)
+
+  * java Permutation 10 < permutation10.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdIn(TimePermutation.java:61)
+    TimePermutation.test1(TimePermutation.java:304)
+    TimePermutation.main(TimePermutation.java:358)
+
+  * java Permutation 1 < mediumTale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdIn(TimePermutation.java:61)
+    TimePermutation.test1(TimePermutation.java:305)
+    TimePermutation.main(TimePermutation.java:358)
+
+  * java Permutation 20 < tale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdIn(TimePermutation.java:61)
+    TimePermutation.test1(TimePermutation.java:306)
+    TimePermutation.main(TimePermutation.java:358)
+
+  * java Permutation 100 < tale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdIn(TimePermutation.java:61)
+    TimePermutation.test1(TimePermutation.java:307)
+    TimePermutation.main(TimePermutation.java:358)
+
+  * java Permutation 16412 < tale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdIn(TimePermutation.java:61)
+    TimePermutation.test1(TimePermutation.java:308)
+    TimePermutation.main(TimePermutation.java:358)
+
+==> FAILED
+
+Test 2: count calls to methods in Deque and RandomizedQueue
+  * java Permutation 5 < distinct.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToDequeAndRandomizedQueue(TimePermutation.java:140)
+    TimePermutation.test2(TimePermutation.java:314)
+    TimePermutation.main(TimePermutation.java:361)
+
+  * java Permutation 10 < permutation10.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToDequeAndRandomizedQueue(TimePermutation.java:140)
+    TimePermutation.test2(TimePermutation.java:315)
+    TimePermutation.main(TimePermutation.java:361)
+
+  * java Permutation 1 < mediumTale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToDequeAndRandomizedQueue(TimePermutation.java:140)
+    TimePermutation.test2(TimePermutation.java:316)
+    TimePermutation.main(TimePermutation.java:361)
+
+  * java Permutation 20 < tale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToDequeAndRandomizedQueue(TimePermutation.java:140)
+    TimePermutation.test2(TimePermutation.java:317)
+    TimePermutation.main(TimePermutation.java:361)
+
+  * java Permutation 100 < tale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToDequeAndRandomizedQueue(TimePermutation.java:140)
+    TimePermutation.test2(TimePermutation.java:318)
+    TimePermutation.main(TimePermutation.java:361)
+
+  * java Permutation 16412 < tale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToDequeAndRandomizedQueue(TimePermutation.java:140)
+    TimePermutation.test2(TimePermutation.java:319)
+    TimePermutation.main(TimePermutation.java:361)
+
+==> FAILED
+
+Test 3: count calls to methods in StdRandom
+  * java Permutation 5 < distinct.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdRandom(TimePermutation.java:225)
+    TimePermutation.test3(TimePermutation.java:325)
+    TimePermutation.main(TimePermutation.java:364)
+
+  * java Permutation 10 < permutation10.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:178)
+    Permutation.main(Permutation.java:16)
+    UtilCOS.execute(UtilCOS.java:153)
+    UtilCOS.execute(UtilCOS.java:140)
+    TimePermutation.countCallsToStdRandom(TimePermutation.java:225)
+    TimePermutation.test3(TimePermutation.java:326)
+    TimePermutation.main(TimePermutation.java:364)
+
+  * java Permutation 1 < mediumTale.txt
+    java.util.ConcurrentModificationException: randomized queue was modified during iteration
+
+    RandomizedQueue$RandomIterator.checkFailFast(RandomizedQueue.java:201)
+    RandomizedQueue$RandomIterator.hasNext(RandomizedQueue.java:1
+
+...
+
+WARNING: the grading output was truncated due to excessive length.
+Typically, this is because you have a method that has an unanticipated side effect
+(such as printing to standard output or throwing an exception). A large amount of output
+can also arise from failing many tests.
