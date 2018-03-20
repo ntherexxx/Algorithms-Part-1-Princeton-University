@@ -22,7 +22,7 @@ public class Deque<Item> implements Iterable<Item> {
 	}                          // construct an empty deque
 	public boolean isEmpty()
 	{
-		return n > 0;
+		return n == 0;
 	}                 // is the deque empty?
 	public int size()
 	{
@@ -31,9 +31,8 @@ public class Deque<Item> implements Iterable<Item> {
 	public void addFirst(Item item)
 	{
 		// Check if item is null
-		if (item == null) {
+		if (item == null)
 			throw new java.lang.NullPointerException("add first have null item");
-		}
 
 		// Case 1: many elements
 		Node tmp = first;
@@ -43,15 +42,15 @@ public class Deque<Item> implements Iterable<Item> {
 		first.prev = null;
 		n++;
 
-		if (n == 1) {
+		if (n == 1)
 			last = first;
-		}
+		else
+			tmp.prev = first;
 	}          // add the item to the front
 	public void addLast(Item item)
 	{
-		if (item == null) {
+		if (item == null)
 			throw new java.lang.NullPointerException("add last have null item");
-		}
 
 		Node tmp = last;
 		last = new Node();
@@ -60,35 +59,29 @@ public class Deque<Item> implements Iterable<Item> {
 		last.next = null;
 		n++;
 
-		if (n == 1) {
+		if (n == 1)
 			last = first;
-		}
+		else
+			tmp.next = last;
 	}           // add the item to the end
 	public Item removeFirst()
 	{
 		// Case 1: No element
 		if (isEmpty())
-		throw new java.util.NoSuchElementException("removeFirst has no element");
+			throw new java.util.NoSuchElementException("removeFirst has no element");
 
 
 		Item tmpItem = first.item;
-		Node firstNext = first.next;
-
+		first = first.next;
 		// Case 2: One Element
 		// Set all to null and 0
-		if (firstNext == null) {
-			first = null;
-			last = null;
-			n = 0;
-			return tmpItem;
+		if (first != null) {
+			first.prev = null;
 		}
-
-		// Case 3: More than one element
-		// First point to its next and Last not move
-		first = firstNext;
-		first.prev = null;
-
 		n--;
+		if (isEmpty()) {
+			last = null;
+		}
 		return tmpItem;
 	}                // remove and return the item from the front
 	public Item removeLast()
@@ -98,23 +91,17 @@ public class Deque<Item> implements Iterable<Item> {
 		throw new java.util.NoSuchElementException("removeLast has no element");
 
 		Item tmpItem = last.item;
-		Node lastPrev = last.prev;
+		last = last.prev;
 
 		// Case 2: One Element
 		// Set all to null and 0
-		if (lastPrev == null) {
-			first = null;
-			last = null;
-			n = 0;
-			return tmpItem;
+		if (last != null) {
+			last.next = null;
 		}
-
-		// Case 3: More than one element
-		// First point to its next and Last not move
-		last = lastPrev;
-		last.next = null;
-
 		n--;
+		if (isEmpty()) {
+			first = null;
+		}
 		return tmpItem;
 	}                 // remove and return the item from the end
 

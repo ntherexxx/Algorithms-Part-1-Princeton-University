@@ -3,15 +3,15 @@ import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
-private int capacity; // Array Capacity
-private int N; // Number of Element in Array
-private Item[] s;
+	private int capacity; // Array Capacity
+	private int N; // Number of Element in Array
+	private Item[] s;
 
-public RandomizedQueue() {
-	N = 0;
-	capacity = 1;
-	s = (Item[]) new Object[capacity];
-}                 
+	public RandomizedQueue() {
+		N = 0;
+		capacity = 1;
+		s = (Item[]) new Object[capacity];
+	}                 
 // construct an empty randomized queue
 	public boolean isEmpty() {
 		return N == 0;
@@ -19,12 +19,14 @@ public RandomizedQueue() {
 	// is the randomized queue empty?
 	public int size() {
 		return N;
+	}
+	public int capacity() {
+		return capacity;
 	}                       
 	// return the number of items on the randomized queue
 	public void enqueue(Item item) {
-		if (item == null) {
+		if (item == null)
 			throw new IllegalArgumentException("enqueue item is null");
-		}
 
 		s[N++] = item;
 		
