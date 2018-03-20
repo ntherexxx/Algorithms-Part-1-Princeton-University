@@ -95,7 +95,7 @@ public class Deque<Item> implements Iterable<Item> {
 	{
 		// Case 1: No element
 		if (isEmpty())
-		throw new java.util.NoSuchElementException("removeFirst has no element");
+		throw new java.util.NoSuchElementException("removeLast has no element");
 
 		Item tmpItem = last.item;
 		Node lastPrev = last.prev;
