@@ -31,7 +31,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    			Item[] tmp = (Item[]) new Object[capacity];
    			int index = 0;
    			for (Item i : s) {
-   				tmp[index++] = i;
+   				if (i != null) {
+   					tmp[index++] = i;
+   				}
    			}
    			s = tmp;
    		}
@@ -42,20 +44,25 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    		if (isEmpty()) {
    			throw new NoSuchElementException("dequeue has empty array");
    		}
+
    		int index = StdRandom.uniform(N);
    		Item tmpItem = s[index];
+   		while (tmpItem == null) {
+   			index = StdRandom.uniform(N);
+   			tmpItem = s[index];
+   		}
 
-   		s[index] = s[--N];
-   		s[--N] = null;
+   		s[index] = null;
+   		N--;
 
    		if (N <= (capacity / 4)) {
    			capacity /= 2;
    			Item[] tmp = (Item[]) new Object[capacity];
-   			for (int i = 0; i < capacity; i++) {
-   				if (s[i] == null) {
-   					continue;
+   			int index = 0;
+   			for (Item i : s) {
+   				if (i != null) {
+   					tmp[index++] = i;
    				}
-   				tmp[i] = s[i];
    			}
    			s = tmp;
    		}
@@ -72,7 +79,19 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    		return new ListIterator();
    	}        
    	// return an independent iterator over items in random order
+   	private class ListIterator implements Iterator<Item> {
+   		public boolean hasNext() {
+   			return N > 0;
+   		}
 
+   		public void remove() {
+   			throw new UnsupportedOperationException("remove is not supported");
+   		}
+
+   		public Item next() {
+   			int index = 
+   		}
+   	}
    	private class ListIterator implements Iterator<Item> {
    		private int current = 0;
    		private int[] shuffle = new int[N];
