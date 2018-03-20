@@ -9,17 +9,23 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		N = 0;
 		capacity = 1;
 		s = (Item[]) new Object[capacity];
-	}                 // construct an empty randomized queue
+	}                 
+	// construct an empty randomized queue
    	public boolean isEmpty() {
    		return N == 0;
-   	}                // is the randomized queue empty?
+   	}                
+   	// is the randomized queue empty?
    	public int size() {
    		return N;
-   	}                       // return the number of items on the randomized queue
+   	}                       
+   	// return the number of items on the randomized queue
    	public void enqueue(Item item) {
    		if (item == null) {
    			throw new IllegalArgumentException("enqueue item is null")
    		}
+
+   		s[N++] = item;
+   		
    		if (N == capacity) {
    			capacity = capacity * 2;
    			Item[] tmp = (Item[]) new Object[capacity];
@@ -29,9 +35,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    			}
    			s = tmp;
    		}
-   		s[N++] = item;
-   		N++;
-   	}          // add the item
+
+   	}          
+   	// add the item
    	public Item dequeue() {
    		if (isEmpty()) {
    			throw new NoSuchElementException("dequeue has empty array");
@@ -41,26 +47,31 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
    		s[index] = s[--N];
    		s[--N] = null;
-   		N--;
 
    		if (N <= (capacity / 4)) {
    			capacity /= 2;
    			Item[] tmp = (Item[]) new Object[capacity];
    			for (int i = 0; i < capacity; i++) {
+   				if (s[i] == null) {
+   					continue;
+   				}
    				tmp[i] = s[i];
    			}
    			s = tmp;
    		}
    		return tmpItem;
-   	}                   // remove and return a random item
+   	}                   
+   	// remove and return a random item
    	public Item sample() {
    		int index = StdRandom.uniform(N);
    		Item tmpItem = s[index];
    		return tmpItem;
-   	}                    // return a random item (but do not remove it)
+   	}                    
+   	// return a random item (but do not remove it)
    	public Iterator<Item> iterator() {
    		return new ListIterator();
-   	}        // return an independent iterator over items in random order
+   	}        
+   	// return an independent iterator over items in random order
 
    	private class ListIterator implements Iterator<Item> {
    		private int current = 0;
