@@ -41,12 +41,11 @@ public class Deque<Item> implements Iterable<Item> {
 		first.item = item;
 		first.next = tmp;
 		first.prev = null;
+		n++;
 
-		if (isEmpty()) {
+		if (n == 1) {
 			last = first;
 		}
-
-		n++;
 	}          // add the item to the front
 	public void addLast(Item item)
 	{
@@ -59,12 +58,11 @@ public class Deque<Item> implements Iterable<Item> {
 		last.item = item;
 		last.prev = tmp;
 		last.next = null;
-
-		if (isEmpty()) {
-			first = last;
-		}
-
 		n++;
+
+		if (n == 1) {
+			last = first;
+		}
 	}           // add the item to the end
 	public Item removeFirst()
 	{
