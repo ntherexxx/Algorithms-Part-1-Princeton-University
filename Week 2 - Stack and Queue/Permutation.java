@@ -2,7 +2,7 @@ import edu.princeton.cs.algs4.StdIn;
 import java.util.Iterator;
 
 public class Permutation {
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     public static void main(String[] args) {  
         int num = Integer.parseInt(args[0]);
         RandomizedQueue<String> rq = new RandomizedQueue<String>();

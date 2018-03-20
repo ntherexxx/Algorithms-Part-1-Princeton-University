@@ -6,7 +6,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int capacity; // Array Capacity
     private int n; // Number of Element in Array
     private Item[] s;
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     public RandomizedQueue() {
         n = 0;
         capacity = 1;

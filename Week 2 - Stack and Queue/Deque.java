@@ -5,7 +5,7 @@ public class Deque<Item> implements Iterable<Item> {
     private int n; // size of deque
     private Node first;
     private Node last;
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     private class Node
     {
         private Item item;
@@ -44,7 +44,8 @@ public class Deque<Item> implements Iterable<Item> {
             last = first;
         else
             tmp.prev = first;
-    }          // add the item to the front
+    }          
+    // add the item to the front
     public void addLast(Item item)
     {
         if (item == null)
@@ -58,10 +59,11 @@ public class Deque<Item> implements Iterable<Item> {
         n++;
         
         if (n == 1)
-            last = first;
+            first = last;
         else
             tmp.next = last;
-    }           // add the item to the end
+    }           
+    // add the item to the end
     public Item removeFirst()
     {
         // Case 1: No element
@@ -108,7 +110,7 @@ public class Deque<Item> implements Iterable<Item> {
         private Node current = first;
         
         public boolean hasNext() {
-            return current.next != null;
+            return current != null;
         }
         
         public void remove() {
