@@ -44,9 +44,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException("dequeue has empty array");
         }
+        int index = 0;
         Item tmpItem = null;
         while (tmpItem == null) {
-            int index = StdRandom.uniform(n);
+            index = StdRandom.uniform(n);
             tmpItem = s[index];
         }
         n--;
