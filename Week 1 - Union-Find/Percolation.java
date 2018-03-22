@@ -110,7 +110,7 @@ public class Percolation {
   public boolean isFull(int row, int col) {
     int pos = getIndex(row, col);
     if (row >= 1 && row <= numElement && col >= 1 && col <= numElement) {
-      return grid.connected(VIRTUAL_TOP, pos);
+      return uf2.connected(VIRTUAL_TOP, pos);
     }
     else throw new IllegalArgumentException("isFull have illegal index.");
     // Full: connected to top row
