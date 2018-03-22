@@ -2,6 +2,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
   private final WeightedQuickUnionUF grid;
+  private final WeightedQuickUnionUF uf2;
   private boolean[][] openSite;
   private final int VIRTUAL_BOT;
   private final int numElement;
@@ -19,6 +20,7 @@ public class Percolation {
     // size = 25
     numElement = n;
     grid = new WeightedQuickUnionUF(size + 2);
+    uf2 = new WeightedQuickUnionUF(size + 1);
     VIRTUAL_BOT = size + 1; //  26
 
     /*
@@ -55,6 +57,7 @@ public class Percolation {
 
     if (row == 1) {
       grid.union(VIRTUAL_TOP, pos);
+      uf2.union(VIRTUAL_TOP, pos);
     }
 
     if (row == numElement) {
@@ -72,10 +75,22 @@ public class Percolation {
     }
     // Connect to adjacent blocks
 
-    if (col > 1 && isOpen(row, col - 1)) grid.union(pos, left);
-    if (col < numElement && isOpen(row, col + 1)) grid.union(pos, right);
-    if (row > 1 && isOpen(row - 1, col)) grid.union(pos, up);
-    if (row < numElement && isOpen(row + 1, col)) grid.union(pos, down);
+    if (col > 1 && isOpen(row, col - 1)) {
+      grid.union(pos, left);
+      uf2.union(pos, left);
+    }
+    if (col < numElement && isOpen(row, col + 1)) {
+      grid.union(pos, right);
+      uf2.union(pos, right);
+    }
+    if (row > 1 && isOpen(row - 1, col)) {
+      grid.union(pos, up);
+      uf2.union(pos, up);
+    }
+    if (row < numElement && isOpen(row + 1, col)) {
+      grid.union(pos, down);
+      uf2.union(pos,down);
+    }
 
     // System.out.println("Opening " + row + ' ' + col);
     // Open 3 2
