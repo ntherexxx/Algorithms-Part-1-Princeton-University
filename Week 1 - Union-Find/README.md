@@ -7,3 +7,5 @@ We illustrate our basic approach to developing and analyzing algorithms by consi
 + Design different algorithms (quick find, quick union, weighted quick union, path compression) for the union-find data type.
 + Develop Java implementations of different algorithms for the union-find data type.
 + Use the parent-link representation to represent tree data structures.
+# Grade
+100/100
