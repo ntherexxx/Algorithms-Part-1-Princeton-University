@@ -7,15 +7,13 @@ public class Permutation {
         int num = Integer.parseInt(args[0]);
         RandomizedQueue<String> rq = new RandomizedQueue<String>();
         
-        Iterator<String> itr = rq.iterator();
-        
-        for (int i = 0; i < num; i++) {
+        while (!StdIn.isEmpty()) {
             String tmp = StdIn.readString();
             rq.enqueue(tmp);
         }
         
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
+        for (int i = 0; i < num; i++) {
+            System.out.println(rq.dequeue());
         }
     }
 }
