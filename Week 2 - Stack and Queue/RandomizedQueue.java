@@ -50,8 +50,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // Pick a random item
     int index = StdRandom.uniform(n);
     Item tmpItem = s[index];
+    while (tmpItem == null) {
+      index = StdRandom.uniform(n);
+      tmpItem = s[index];
+    }
+
+    s[index] = s[n - 1];
+    s[n - 1] = null;
     // Remove the item
-    s[index] = null;
     n--;
 
     if (n <= (capacity / 4)) {
@@ -76,6 +82,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
     int index = StdRandom.uniform(n);
     Item tmpItem = s[index];
+    while (tmpItem == null) {
+      index = StdRandom.uniform(n);
+      tmpItem = s[index];
+    }
     return tmpItem;
   }
   // return a random item (but do not remove it)
@@ -84,8 +94,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   }
   // return an independent iterator over items in random order
   private class ListIterator implements Iterator<Item> {
+    int i = 0;
+
     public boolean hasNext() {
-      return n > 0;
+      return i > n;
     }
 
     public void remove() {
@@ -97,6 +109,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
       int index = StdRandom.uniform(n);
       Item tmpItem = s[index];
+      while (tmpItem == null) {
+        index = StdRandom.uniform(n);
+        tmpItem = s[index];
+      }
 
       return tmpItem;
     }
