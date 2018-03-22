@@ -61,7 +61,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
       capacity /= 2;
       Item[] tmp = (Item[]) new Object[capacity];
       index = 0;
-      for (item i : s) {
+      for (Item i : s) {
         if (i != null) {
           tmp[index] = i;
           index++;
