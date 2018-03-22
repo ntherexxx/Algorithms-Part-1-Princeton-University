@@ -34,7 +34,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
       int index = 0;
       for (Item i : s) {
         if (i != null) {
-          tmp[index++] = i;
+          tmp[index] = i;
+          index++;
         }
       }
       s = tmp;
@@ -57,7 +58,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     s[index] = null;
     n--;
 
-    if (n < (capacity / 4)) {
+    if (n <= (capacity / 4)) {
       capacity /= 2;
       Item[] tmp = (Item[]) new Object[capacity];
       index = 0;
