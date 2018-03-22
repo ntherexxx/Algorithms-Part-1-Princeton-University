@@ -48,12 +48,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
       throw new NoSuchElementException("dequeue has empty array");
     }
     // Pick a random item
-    int index = 0;
-    Item tmpItem = null;
-    while (tmpItem == null) {
-      index = StdRandom.uniform(n);
-      tmpItem = s[index];
-    }
+    int index = StdRandom.uniform(n);
+    Item tmpItem = s[index];
     // Remove the item
     s[index] = null;
     n--;
@@ -78,11 +74,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     if (isEmpty()) {
       throw new NoSuchElementException("dequeue has empty array");
     }
-    Item tmpItem = null;
-    while (tmpItem == null) {
-      int index = StdRandom.uniform(n);
-      tmpItem = s[index];
-    }
+    int index = StdRandom.uniform(n);
+    Item tmpItem = s[index];
     return tmpItem;
   }
   // return a random item (but do not remove it)
@@ -102,11 +95,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item next() {
       if (!hasNext()) throw new NoSuchElementException("next has no element");
 
-      Item tmpItem = null;
-      while (tmpItem == null) {
-        int index = StdRandom.uniform(n);
-        tmpItem = s[index];
-      }
+      int index = StdRandom.uniform(n);
+      Item tmpItem = s[index];
+
       return tmpItem;
     }
   }
