@@ -5,10 +5,12 @@ We study the mergesort algorithm and show that it guarantees to sort any array o
 Our lectures this week are based on two classic algorithms that were invented over 50 years ago, but are still important and relevant today, as implementations of one or both of them are found in virtually every software system and research on new variants of these classic methods is ongoing. Our treatment ranges from the mathematical models that explain why these methods are efficient to the details of adapting them to real-world applications on modern systems.
 
 ## Lecture
-Mergesort. We study the mergesort algorithm and show that it guarantees to sort any array of n items with at most nlgn compares. We also consider a nonrecursive, bottom-up version. We prove that any compare-based sorting algorithm must make at least ∼nlgn compares in the worst case. We discuss using different orderings for the objects that we are sorting and the related concept of stability.
+### Mergesort.
+We study the mergesort algorithm and show that it guarantees to sort any array of n items with at most nlgn compares. We also consider a nonrecursive, bottom-up version. We prove that any compare-based sorting algorithm must make at least ∼nlgn compares in the worst case. We discuss using different orderings for the objects that we are sorting and the related concept of stability.
 
 ## Lecture
-Quicksort. We introduce and implement the randomized quicksort algorithm and analyze its performance. We also consider randomized quickselect, a quicksort variant which finds the kth smallest item in linear time. Finally, consider 3-way quicksort, a variant of quicksort that works especially well in the presence of duplicate keys.
+### Quicksort.
+We introduce and implement the randomized quicksort algorithm and analyze its performance. We also consider randomized quickselect, a quicksort variant which finds the kth smallest item in linear time. Finally, consider 3-way quicksort, a variant of quicksort that works especially well in the presence of duplicate keys.
 
 ## Exercises.
 (Sorry, we are still waiting for Coursera to migrate the exercises from the old platform.) Drill exercises on the lecture material.
