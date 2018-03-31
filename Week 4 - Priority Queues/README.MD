@@ -1,7 +1,7 @@
 # Priority Queues
 We introduce the priority queue data type and an efficient implementation using the binary heap data structure. This implementation also leads to an efficient sorting algorithm known as heapsort. We conclude with an applications of priority queues where we simulate the motion of n particles subject to the laws of elastic collision.
 
-#Overview
+# Overview
 This week we are going to introduce two fundamental data types, address the challenges of developing algorithms and data structures that can serve as the basis of efficient implementations, and try to convince you that such implementations enable solution of a broad range of applications problems that could not be solved without them.
 
 ## Lecture: Priority Queues. 
