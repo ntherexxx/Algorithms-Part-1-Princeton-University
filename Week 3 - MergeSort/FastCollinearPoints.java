@@ -29,7 +29,7 @@ public class FastCollinearPoints {
 
             for (int p = 0, next = 1, last = 2; last < len; last++) {
               double slopePNext = pointsCopy[p].slopeTo(pointsCopy[next]);
-              double slopePLast = pointsCopy[p].slopeTo(pointsCopy[last];
+              double slopePLast = pointsCopy[p].slopeTo(pointsCopy[last]);
                 while (last < len && Double.compare(slopePNext, slopePLast) == 0) {
                     last++;
                 }
