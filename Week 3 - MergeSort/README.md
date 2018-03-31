@@ -23,3 +23,6 @@ Algorithmic interview questions based on the lecture material.
 
 ## Suggested Readings.
 Section 2.2 and 2.3 in Algorithms, 4th edition.
+
+# Grades
+100/100
