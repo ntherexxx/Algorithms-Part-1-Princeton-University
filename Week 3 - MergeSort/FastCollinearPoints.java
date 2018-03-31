@@ -5,16 +5,20 @@ public class FastCollinearPoints {
     private final ArrayList<LineSegment> foundSegments = new ArrayList<LineSegment>();
 
     public FastCollinearPoints(Point[] points) {
-        int len = points.length;
-
-        if (len == 0) throw new IllegalArgumentException("No elements");
-        // Check duplicates
-        for (int i = 0; i < len - 1; i++) {
-            for (int j = i + 1; j < len; j++) {
-                if (points[i] == null) throw new IllegalArgumentException("Null Element");
-                if (points[i].compareTo(points[j]) == 0) throw new IllegalArgumentException("Duplicate Elements");
-            }
+      if (points == null) {
+        throw new IllegalArgumentException("Null Constructor");
+      }
+      int len = points.length;
+      for (int i = 0; i < len; i++) {
+        if (points[i] == null) throw new IllegalArgumentException("Null Element");
+      }
+      if (len == 0) throw new IllegalArgumentException("No elements");
+      // Check duplicates
+      for (int i = 0; i < len - 1; i++) {
+        for (int j = i + 1; j < len; j++) {
+          if (points[i].compareTo(points[j]) == 0) throw new IllegalArgumentException("Duplicate Elements");
         }
+      }
 
         Point[] pointsCopy = points.clone();
         len = pointsCopy.length;
