@@ -28,10 +28,12 @@ public class FastCollinearPoints {
             Arrays.sort(pointsCopy, pointsCopy[i].slopeOrder());
 
             for (int p = 0, next = 1, last = 2; last < len; last++) {
-                while (last < len && pointsCopy[p].slopeTo(pointsCopy[next]) == pointsCopy[p].slopeTo(pointsCopy[last])) {
+              double slopePNext = pointsCopy[p].slopeTo(pointsCopy[next]);
+              double slopePLast = pointsCopy[p].slopeTo(pointsCopy[last];
+                while (last < len && Double.compare(slopePNext, slopePLast) == 0) {
                     last++;
                 }
-                if (last - next >= 3 && pointsCopy[p].compareTo(pointsCopy[last]) < 0) {
+                if (last - next >= 3 && pointsCopy[p].compareTo(pointsCopy[next]) < 0) {
                     foundSegments.add(new LineSegment(pointsCopy[p], pointsCopy[last - 1]));
                 }
 

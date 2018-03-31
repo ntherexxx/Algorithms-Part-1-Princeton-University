@@ -30,8 +30,10 @@ public class BruteCollinearPoints {
       for (int q = p + 1; q < len - 2; q++) {
         for (int r = q + 1; r < len - 1; r++) {
           for (int s = r + 1; s < len; s++) {
-            if (pointsCopy[p].slopeTo(pointsCopy[q]) == pointsCopy[p].slopeTo(pointsCopy[r]) &&
-            pointsCopy[p].slopeTo(pointsCopy[r]) == pointsCopy[p].slopeTo(pointsCopy[s])) {
+            double slopePQ = pointsCopy[p].slopeTo(pointsCopy[q]);
+            double slopePR = pointsCopy[p].slopeTo(pointsCopy[r];
+            double slopePS = pointsCopy[p].slopeTo(pointsCopy[s];
+            if (Double.compare(slopePQ, slopePR) == 0 && Double.compare(slopePR, slopePS) == 0) {
               foundSegments.add(new LineSegment(pointsCopy[p], pointsCopy[s]));
             }
           }
