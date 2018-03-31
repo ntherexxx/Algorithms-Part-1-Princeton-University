@@ -1,0 +1,1522 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED
+API:          PASSED
+
+Findbugs:     FAILED (3 warnings)
+PMD:          PASSED
+Checkstyle:   FAILED (0 errors, 1 warning)
+
+Correctness:  20/41 tests passed
+Memory:       1/1 tests passed
+Timing:       17/41 tests passed
+
+Aggregate score: 57.56%
+[Compilation: 5%, API: 5%, Findbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+1.8K Mar 31 03:43 BruteCollinearPoints.class
+1.8K Mar 31 03:43 BruteCollinearPoints.java
+1.8K Mar 31 03:43 FastCollinearPoints.class
+1.8K Mar 31 03:43 FastCollinearPoints.java
+2.0K Mar 31 03:43 LineSegment.java
+ 894 Mar 31 03:43 Point$1.class
+1.9K Mar 31 03:43 Point.class
+4.2K Mar 31 03:43 Point.java
+2.3K Mar 31 03:43 README.md
+4.2M Mar 31 03:43 Week\ 3\ -\ MergeSort.pdf
+ 59K Mar 31 03:43 log1.txt
+
+
+********************************************************************************
+*  COMPILING
+********************************************************************************
+
+
+% javac Point.java
+*-----------------------------------------------------------
+
+% javac BruteCollinearPoints.java
+*-----------------------------------------------------------
+
+% javac FastCollinearPoints.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+Point:
+
+BruteCollinearPoints:
+
+FastCollinearPoints:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS
+********************************************************************************
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+M D ICAST_IDIV_CAST_TO_DOUBLE ICAST: Casts the result of an integral division operation to type 'double'. Did you mean to cast one (or both) of the operands to type 'double' before performing the division?  At Point.java:[line 66]
+L D FE_FLOATING_POINT_EQUALITY FE: Tests for exact floating-point equality. Because floating-point calculations may involve rounding, the calculated values may be imprecise.  At BruteCollinearPoints.java:[line 28]
+L D FE_FLOATING_POINT_EQUALITY FE: Tests for exact floating-point equality. Because floating-point calculations may involve rounding, the calculated values may be imprecise.  At FastCollinearPoints.java:[line 27]
+Warnings generated: 3
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] FastCollinearPoints.java:28:25: Control variable 'last' is modified inside loop. [ModifiedControlVariable]
+Checkstyle ends with 0 errors and 1 warning.
+
+% custom checkstyle checks for Point.java
+*-----------------------------------------------------------
+
+% custom checkstyle checks for BruteCollinearPoints.java
+*-----------------------------------------------------------
+
+% custom checkstyle checks for FastCollinearPoints.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+********************************************************************************
+*  TESTING CORRECTNESS
+********************************************************************************
+
+Testing correctness of Point
+*-----------------------------------------------------------
+Running 3 total tests.
+
+Test 1: p.slopeTo(q)
+  * positive infinite slope, where p and q have coordinates in [0, 500)
+  * positive infinite slope, where p and q have coordinates in [0, 32768)
+  * negative infinite slope, where p and q have coordinates in [0, 500)
+     Failed on trial 1 of 100000
+     p, q          = (277, 309)
+     p.slopeTo(q)  = 0.0
+  * negative infinite slope, where p and q have coordinates in [0, 32768)
+     Failed on trial 1 of 100000
+     p, q          = (7034, 19133)
+     p.slopeTo(q)  = 0.0
+  * positive zero     slope, where p and q have coordinates in [0, 500)
+  * positive zero     slope, where p and q have coordinates in [0, 32768)
+  * symmetric for random points p and q with coordinates in [0, 500)
+  * symmetric for random points p and q with coordinates in [0, 32768)
+  * transitive for random points p, q, and r with coordinates in [0, 500)
+  * transitive for random points p, q, and r with coordinates in [0, 32768)
+  * slopeTo(), where p and q have coordinates in [0, 500)
+     Failed on trial 1 of 100000
+     p                        = (322, 2)
+     q                        = (461, 382)
+     student   p.slopeTo(q) = 2.0
+     reference p.slopeTo(q) = 2.7338129496402876
+  * slopeTo(), where p and q have coordinates in [0, 32768)
+     Failed on trial 1 of 100000
+     p                        = (1572, 25010)
+     q                        = (4791, 26767)
+     student   p.slopeTo(q) = 0.0
+     reference p.slopeTo(q) = 0.5458216837527182
+  * slopeTo(), where p and q have coordinates in [0, 10)
+     Failed on trial 1 of 100000
+     p                        = (6, 7)
+     q                        = (2, 8)
+     student   p.slopeTo(q) = 0.0
+     reference p.slopeTo(q) = -0.25
+  * throw a java.lang.NullPointerException if argument is null
+==> FAILED
+
+Test 2: p.compareTo(q)
+  * reflexive, where p and q have coordinates in [0, 500)
+  * reflexive, where p and q have coordinates in [0, 32768)
+  * antisymmetric, where p and q have coordinates in [0, 500)
+     Failed on trial 88 of 100000
+     p               = (420, 387)
+     q               = (368, 387)
+     p.compareTo(q)  = -1
+     q.compareTo(p)  = -1
+  * antisymmetric, where p and q have coordinates in [0, 32768)
+     Failed on trial 15118 of 100000
+     p               = (29185, 30255)
+     q               = (8531, 30255)
+     p.compareTo(q)  = -1
+     q.compareTo(p)  = -1
+  * transitive, where p, q, and r have coordinates in [0, 500)
+  * transitive, where p, q, and r have coordinates in [0, 32768)
+  * sign of compareTo(), where p and q have coordinates in [0, 500)
+     Failed on trial 330 of 100000
+     p                        = (146, 239)
+     q                        = (9, 239)
+     student   p.compareTo(q) = -1
+     reference p.compareTo(q) = 1
+  * sign of compareTo(), where p and q have coordinates in [0, 32768)
+     Failed on trial 3395 of 100000
+     p                        = (32504, 9788)
+     q                        = (9513, 9788)
+     student   p.compareTo(q) = -1
+     reference p.compareTo(q) = 1
+  * sign of compareTo(), where p and q have coordinates in [0, 10)
+     Failed on trial 8 of 100000
+     p                        = (9, 9)
+     q                        = (2, 9)
+     student   p.compareTo(q) = -1
+     reference p.compareTo(q) = 1
+  * throw java.lang.NullPointerException exception if argument is null
+==> FAILED
+
+Test 3: p.slopeOrder().compare(q, r)
+  * reflexive, where p and q have coordinates in [0, 500)
+  * reflexive, where p and q have coordinates in [0, 32768)
+  * antisymmetric, where p, q, and r have coordinates in [0, 500)
+  * antisymmetric, where p, q, and r have coordinates in [0, 32768)
+  * transitive, where p, q, r, and s have coordinates in [0, 500)
+  * transitive, where p, q, r, and s have coordinates in [0, 32768)
+  * sign of compare(), where p, q, and r have coordinates in [0, 500)
+     Failed on trial 1 of 100000
+     p                         = (18, 293)
+     q                         = (422, 298)
+     r                         = (337, 44)
+     student   p.compare(q, r) = 0
+     reference p.compare(q, r) = 1
+     reference p.slopeTo(q)    = 0.012376237623762377
+     reference p.slopeTo(r)    = -0.780564263322884
+  * sign of compare(), where p, q, and r have coordinates in [0, 32768)
+     Failed on trial 1 of 100000
+     p                         = (4137, 11969)
+     q                         = (19997, 23932)
+     r                         = (22629, 5447)
+     student   p.compare(q, r) = 0
+     reference p.compare(q, r) = 1
+     reference p.slopeTo(q)    = 0.7542875157629256
+     reference p.slopeTo(r)    = -0.3526930564568462
+  * sign of compare(), where p, q, and r have coordinates in [0, 10)
+     Failed on trial 2 of 100000
+     p                         = (5, 7)
+     q                         = (0, 4)
+     r                         = (8, 8)
+     student   p.compare(q, r) = 0
+     reference p.compare(q, r) = 1
+     reference p.slopeTo(q)    = 0.6
+     reference p.slopeTo(r)    = 0.3333333333333333
+  * throw java.lang.NullPointerException if either argument is null
+==> FAILED
+
+
+Total: 0/3 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TESTING CORRECTNESS (substituting reference Point and LineSegment)
+********************************************************************************
+
+Testing correctness of BruteCollinearPoints
+*-----------------------------------------------------------
+Running 17 total tests.
+
+The inputs satisfy the following conditions:
+  - no duplicate points
+  - no 5 (or more) points are collinear
+  - all x- and y-coordinates between 0 and 32,767
+
+Test 1: points from a file
+  * filename = input8.txt
+  * filename = equidistant.txt
+  * filename = input40.txt
+  * filename = input48.txt
+==> passed
+
+Test 2a: points from a file with horizontal line segments
+  * filename = horizontal5.txt
+  * filename = horizontal25.txt
+==> passed
+
+Test 2b: random horizontal line segments
+  *  1 random horizontal line segment
+  *  5 random horizontal line segments
+  * 10 random horizontal line segments
+  * 15 random horizontal line segments
+==> passed
+
+Test 3a: points from a file with vertical line segments
+  * filename = vertical5.txt
+  * filename = vertical25.txt
+==> passed
+
+Test 3b: random vertical line segments
+  *  1 random vertical line segment
+  *  5 random vertical line segments
+  * 10 random vertical line segments
+  * 15 random vertical line segments
+==> passed
+
+Test 4a: points from a file with no line segments
+  * filename = random23.txt
+  * filename = random38.txt
+==> passed
+
+Test 4b: random points with no line segments
+  *  5 random points
+  * 10 random points
+  * 20 random points
+  * 50 random points
+==> passed
+
+Test 5: points from a file with fewer than 4 points
+  * filename = input1.txt
+  * filename = input2.txt
+  * filename = input3.txt
+==> passed
+
+Test 6: check for dependence on either compareTo() or compare()
+        returning { -1, +1, 0 } instead of { negative integer,
+        positive integer, zero }
+  * filename = equidistant.txt
+  * filename = input40.txt
+  * filename = input48.txt
+==> passed
+
+Test 7: check for fragile dependence on return value of toString()
+  * filename = equidistant.txt
+  * filename = input40.txt
+  * filename = input48.txt
+==> passed
+
+Test 8: random line segments, none vertical or horizontal
+  *  1 random line segment
+  *  5 random line segments
+  * 10 random line segments
+  * 15 random line segments
+==> passed
+
+Test 9: random line segments
+  *  1 random line segment
+  *  5 random line segments
+  * 10 random line segments
+  * 15 random line segments
+==> passed
+
+Test 10: check that data type is immutable by testing whether each method
+         returns the same value, regardless of any intervening operations
+  * input8.txt
+  * equidistant.txt
+==> passed
+
+Test 11: check that data type does not mutate the constructor argument
+  * input8.txt
+  * equidistant.txt
+==> passed
+
+Test 12: numberOfSegments() is consistent with segments()
+  * filename = input8.txt
+  * filename = equidistant.txt
+  * filename = input40.txt
+  * filename = input48.txt
+  * filename = horizontal5.txt
+  * filename = vertical5.txt
+  * filename = random23.txt
+==> passed
+
+Test 13: throws an exception if either the constructor argument is null
+         or any entry in array is null
+  * argument is null
+    - constructor throws wrong exception
+    - constructor throws a java.lang.NullPointerException
+    - constructor should throw a java.lang.IllegalArgumentException
+     0
+
+  * Point[] of length 10, number of null entries = 1
+    - constructor throws wrong exception
+    - constructor throws a java.lang.NullPointerException
+    - constructor should throw a java.lang.IllegalArgumentException
+     10
+      2868 32023
+      8359 19242
+     27832 11830
+      2593 21674
+     11785 13175
+      8917 21842
+     null
+     30388 20467
+     16217  6918
+      3190 20740
+
+  * Point[] of length 10, number of null entries = 10
+  * Point[] of length 4, number of null entries = 1
+    - constructor throws wrong exception
+    - constructor throws a java.lang.NullPointerException
+    - constructor should throw a java.lang.IllegalArgumentException
+     4
+     21130 12659
+     null
+     16001 28060
+      6162 10462
+
+  * Point[] of length 3, number of null entries = 1
+    - constructor throws wrong exception
+    - constructor throws a java.lang.NullPointerException
+    - constructor should throw a java.lang.IllegalArgumentException
+     3
+     11885  7222
+     null
+     32203  9149
+
+  * Point[] of length 2, number of null entries = 1
+  * Point[] of length 1, number of null entries = 1
+    - constructor fails to throw an exception
+     1
+     null
+
+==> FAILED
+
+Test 14: check that the constructor throws an exception if duplicate points
+  * 50 points
+  * 25 points
+  * 5 points
+  * 4 points
+  * 3 points
+  * 2 points
+==> passed
+
+
+Total: 16/17 tests passed!
+
+
+================================================================
+Testing correctness of FastCollinearPoints
+*-----------------------------------------------------------
+Running 21 total tests.
+
+The inputs satisfy the following conditions:
+  - no duplicate points
+  - all x- and y-coordinates between 0 and 32,767
+
+Test 1: points from a file
+  * filename = input8.txt
+    java.lang.ArrayIndexOutOfBoundsException: 8
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test1(TestFastCollinearPoints.java:156)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:778)
+
+  * filename = equidistant.txt
+    java.lang.ArrayIndexOutOfBoundsException: 15
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test1(TestFastCollinearPoints.java:157)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:778)
+
+  * filename = input40.txt
+    java.lang.ArrayIndexOutOfBoundsException: 40
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test1(TestFastCollinearPoints.java:158)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:778)
+
+  * filename = input48.txt
+    java.lang.ArrayIndexOutOfBoundsException: 48
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test1(TestFastCollinearPoints.java:159)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:778)
+
+  * filename = input299.txt
+    java.lang.ArrayIndexOutOfBoundsException: 299
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test1(TestFastCollinearPoints.java:160)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:778)
+
+==> FAILED
+
+Test 2a: points from a file with horizontal line segments
+  * filename = horizontal5.txt
+    - segments() contains the same segment more than once
+    - segment 2: (16307, 4652) -> (9972, 4652)
+    - segment 3: (16307, 4652) -> (9972, 4652)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 1: (5766, 4652) -> (16307, 4652)
+    - reference segment 0: (4750, 4652) -> (5766, 4652) -> (9972, 4652) -> (16307, 4652)
+
+    - number of entries in student   solution: 8
+    - number of entries in reference solution: 5
+    - 6 extra entries in student solution, including: '(13832, 7657) -> (12772, 7657)'
+    - 3 missing entries in student solution, including: '(2682, 14118) -> (5067, 14118) -> (7453, 14118) -> (7821, 14118)'
+
+  * filename = horizontal25.txt
+    - segments() contains the same segment more than once
+    - segment 2: (19615, 1256) -> (16419, 1256)
+    - segment 3: (19615, 1256) -> (16419, 1256)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 1: (13505, 1256) -> (19615, 1256)
+    - reference segment 0: (10021, 1256) -> (13505, 1256) -> (16419, 1256) -> (19615, 1256)
+
+    - number of entries in student   solution: 59
+    - number of entries in reference solution: 25
+    - 38 extra entries in student solution, including: '(15665, 20333) -> (20780, 20333)'
+    - 4 missing entries in student solution, including: '(8784, 20913) -> (9880, 20913) -> (16352, 20913) -> (19666, 20913)'
+
+  * filename = horizontal50.txt
+    - segments() contains the same segment more than once
+    - segment 2: (15579, 1040) -> (8302, 1040)
+    - segment 3: (15579, 1040) -> (8302, 1040)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 1: (4459, 1040) -> (15579, 1040)
+    - reference segment 0: (2624, 1040) -> (4459, 1040) -> (8302, 1040) -> (15579, 1040)
+
+    - number of entries in student   solution: 112
+    - number of entries in reference solution: 50
+    - 72 extra entries in student solution, including: '(16150, 20684) -> (15008, 20684)'
+    - 10 missing entries in student solution, including: '(5249, 20754) -> (5559, 20754) -> (14800, 20754) -> (17428, 20754)'
+
+  * filename = horizontal75.txt
+    java.lang.ArrayIndexOutOfBoundsException: 300
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test2a(TestFastCollinearPoints.java:169)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:781)
+
+  * filename = horizontal100.txt
+    - segments() contains the same segment more than once
+    - segment 2: (13975, 1279) -> (8690, 1279)
+    - segment 3: (13975, 1279) -> (8690, 1279)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 1: (7354, 1279) -> (13975, 1279)
+    - reference segment 0: (1090, 1279) -> (7354, 1279) -> (8690, 1279) -> (13975, 1279)
+
+    - number of entries in student   solution: 198
+    - number of entries in reference solution: 100
+    - 118 extra entries in student solution, including: '(13207, 20636) -> (20063, 20636)'
+    - 20 missing entries in student solution, including: '(5835, 20698) -> (7673, 20698) -> (16154, 20698) -> (19642, 20698)'
+
+==> FAILED
+
+Test 2b: random horizontal line segments
+  *  1 random horizontal line segment
+    java.lang.ArrayIndexOutOfBoundsException: 4
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.horizontalSegments(TestFastCollinearPoints.java:182)
+    TestFastCollinearPoints.test2b(TestFastCollinearPoints.java:224)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:784)
+
+    - failed on trial 1 of 500
+     4
+     17284 16002
+      7379 16002
+      7487 16002
+      9612 16002
+
+  *  5 random horizontal line segments
+    - segments() contains the same segment more than once
+    - segment 2: (13311, 4952) -> (11690, 4952)
+    - segment 3: (13311, 4952) -> (11690, 4952)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 1: (6078, 4952) -> (13311, 4952)
+    - reference segment 0: (2296, 4952) -> (6078, 4952) -> (11690, 4952) -> (13311, 4952)
+
+    - number of entries in student   solution: 10
+    - number of entries in reference solution: 5
+    - 7 extra entries in student solution, including: '(12747, 14547) -> (9254, 14547)'
+    - 2 missing entries in student solution, including: '(5671, 20385) -> (6518, 20385) -> (6787, 20385) -> (15844, 20385)'
+
+    - failed on trial 1 of 250
+     20
+      2296  4952
+      6078  4952
+      5671 20385
+     11690  4952
+     14126 14710
+     12747 14547
+      7040 14710
+     12806 14710
+     13311  4952
+      6518 20385
+      6329 14547
+     15844 20385
+      9254 14547
+      7566 14547
+     12967  6823
+      8270 14710
+      2114  6823
+      3967  6823
+      6787 20385
+     18704  6823
+
+  * 10 random horizontal line segments
+    - segments() contains the same segment more than once
+    - segment 2: (19708, 2845) -> (17194, 2845)
+    - segment 3: (19708, 2845) -> (17194, 2845)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 1: (8686, 2845) -> (19708, 2845)
+    - reference segment 0: (6052, 2845) -> (8686, 2845) -> (17194, 2845) -> (19708, 2845)
+
+    - number of entries in student   solution: 18
+    - number of entries in reference solution: 10
+    - 10 extra entries in student solution, including: '(8885, 17628) -> (20532, 17628)'
+    - 2 missing entries in student solution, including: '(8395, 17994) -> (11146, 17994) -> (14645, 17994) -> (19114, 17994)'
+
+    - failed on trial 1 of 50
+
+  * 15 random horizontal line segments
+    - segments() contains the same segment more than once
+    - segment 2: (20061, 1176) -> (15416, 1176)
+    - segment 3: (20061, 1176) -> (15416, 1176)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 1: (6354, 1176) -> (20061, 1176)
+    - reference segment 0: (1756, 1176) -> (6354, 1176) -> (15416, 1176) -> (20061, 1176)
+
+    - number of entries in student   solution: 28
+    - number of entries in reference solution: 15
+    - 17 extra entries in student solution, including: '(17673, 19890) -> (20842, 19890)'
+    - 4 missing entries in student solution, including: '(1722, 20681) -> (2311, 20681) -> (4981, 20681) -> (5955, 20681)'
+
+    - failed on trial 1 of 5
+
+==> FAILED
+
+Test 3a: points from a file with vertical line segments
+  * filename = vertical5.txt
+    java.lang.ArrayIndexOutOfBoundsException: 20
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:233)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:787)
+
+  * filename = vertical25.txt
+    java.lang.ArrayIndexOutOfBoundsException: 100
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:234)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:787)
+
+  * filename = vertical50.txt
+    java.lang.ArrayIndexOutOfBoundsException: 200
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:235)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:787)
+
+  * filename = vertical75.txt
+    java.lang.ArrayIndexOutOfBoundsException: 300
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:236)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:787)
+
+  * filename = vertical100.txt
+    java.lang.ArrayIndexOutOfBoundsException: 400
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:237)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:787)
+
+==> FAILED
+
+Test 3b: random vertical line segments
+  *  1 random vertical line segment
+    java.lang.ArrayIndexOutOfBoundsException: 4
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:206)
+    TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:243)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:790)
+
+    - failed on trial 1 of 500
+     4
+      5863 14484
+      5863  2711
+      5863  5146
+      5863 20491
+
+  *  5 random vertical line segments
+    java.lang.ArrayIndexOutOfBoundsException: 20
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:206)
+    TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:244)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:790)
+
+    - failed on trial 1 of 250
+     20
+      7411  1730
+      6893  3969
+     20513  2312
+      6893 19572
+     20513  2577
+      6893 18372
+      9118 16741
+      7411  5777
+     16040  8985
+      9118 13506
+     20513 18034
+     16040 18051
+     16040  4177
+      7411 18782
+      7411 12706
+     16040 16857
+     20513 13293
+      9118 14321
+      9118 13286
+      6893 17927
+
+  * 10 random vertical line segments
+    java.lang.ArrayIndexOutOfBoundsException: 40
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:206)
+    TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:245)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:790)
+
+    - failed on trial 1 of 50
+
+  * 15 random vertical line segments
+    java.lang.ArrayIndexOutOfBoundsException: 60
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:206)
+    TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:246)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:790)
+
+    - failed on trial 1 of 5
+
+==> FAILED
+
+Test 4a: points from a file with no line segments
+  * filename = random23.txt
+  * filename = random38.txt
+  * filename = random91.txt
+  * filename = random152.txt
+==> passed
+
+Test 4b: random points with no line segments
+  *  5 random points
+  * 10 random points
+  * 20 random points
+  * 50 random points
+==> passed
+
+Test 5a: points from a file with 5 or more on some line segments
+  * filename = input9.txt
+    java.lang.ArrayIndexOutOfBoundsException: 9
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:293)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:799)
+
+  * filename = input10.txt
+    java.lang.ArrayIndexOutOfBoundsException: 10
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:294)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:799)
+
+  * filename = input20.txt
+    java.lang.ArrayIndexOutOfBoundsException: 20
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:295)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:799)
+
+  * filename = input50.txt
+    java.lang.ArrayIndexOutOfBoundsException: 50
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:296)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:799)
+
+  * filename = input80.txt
+    java.lang.ArrayIndexOutOfBoundsException: 80
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:297)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:799)
+
+  * filename = input300.txt
+    java.lang.ArrayIndexOutOfBoundsException: 300
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:298)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:799)
+
+  * filename = inarow.txt
+    java.lang.ArrayIndexOutOfBoundsException: 29
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:299)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:799)
+
+==> FAILED
+
+Test 5b: points from a file with 5 or more on some line segments
+  * filename = kw1260.txt
+    java.lang.ArrayIndexOutOfBoundsException: 1260
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5b(TestFastCollinearPoints.java:306)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:802)
+
+  * filename = rs1423.txt
+    java.lang.ArrayIndexOutOfBoundsException: 1423
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test5b(TestFastCollinearPoints.java:308)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:802)
+
+==> FAILED
+
+Test 6: points from a file with fewer than 4 points
+  * filename = input1.txt
+  * filename = input2.txt
+  * filename = input3.txt
+==> passed
+
+Test 7: check for dependence on either compareTo() or compare()
+        returning { -1, +1, 0 } instead of { negative integer,
+        positive integer, zero }
+  * filename = equidistant.txt
+    java.lang.ArrayIndexOutOfBoundsException: 15
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test7(TestFastCollinearPoints.java:325)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:808)
+
+  * filename = input40.txt
+    java.lang.ArrayIndexOutOfBoundsException: 40
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test7(TestFastCollinearPoints.java:326)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:808)
+
+  * filename = input48.txt
+    java.lang.ArrayIndexOutOfBoundsException: 48
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test7(TestFastCollinearPoints.java:327)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:808)
+
+  * filename = input299.txt
+    java.lang.ArrayIndexOutOfBoundsException: 299
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test7(TestFastCollinearPoints.java:328)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:808)
+
+==> FAILED
+
+Test 8: check for fragile dependence on return value of toString()
+  * filename = equidistant.txt
+    java.lang.ArrayIndexOutOfBoundsException: 15
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test8(TestFastCollinearPoints.java:336)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:811)
+
+  * filename = input40.txt
+    java.lang.ArrayIndexOutOfBoundsException: 40
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test8(TestFastCollinearPoints.java:337)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:811)
+
+  * filename = input48.txt
+    java.lang.ArrayIndexOutOfBoundsException: 48
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.file(TestFastCollinearPoints.java:151)
+    TestFastCollinearPoints.test8(TestFastCollinearPoints.java:338)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:811)
+
+
+It is bad style to write code that depends on the particular format of
+the output from the toString() method, especially if your reason for
+doing so is to circumvent the public API (which intentionally does not
+provide access to the x- and y-coordinates).
+
+==> FAILED
+
+Test 9: random line segments, none vertical or horizontal
+  *  1 random line segment
+    java.lang.ArrayIndexOutOfBoundsException: 4
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.noVerticalOrHorizontalSegments(TestFastCollinearPoints.java:360)
+    TestFastCollinearPoints.test9(TestFastCollinearPoints.java:378)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:814)
+
+    - failed on trial 1 of 500
+     4
+     18334 10442
+     15805  7745
+     21706 14038
+     19177 11341
+
+  *  5 random line segments
+    - segments() contains the same segment more than once
+    - segment 7: (15780, 12378) -> (13737, 8058)
+    - segment 8: (15780, 12378) -> (13737, 8058)
+
+    - segments() contains a subsegment of a segment in reference solution
+    - student   segment 2: (6541, 1664) -> (14837, 6373)
+    - reference segment 0: (4589, 556) -> (6541, 1664) -> (7029, 1941) -> (14837, 6373)
+
+    - number of entries in student   solution: 9
+    - number of entries in reference solution: 5
+    - 6 extra entries in student solution, including: '(15780, 12378) -> (13737, 8058)'
+    - 2 missing entries in student solution, including: '(1956, 9040) -> (3470, 10568) -> (9526, 16680) -> (12554, 19736)'
+
+    - failed on trial 1 of 500
+     20
+     13737  8058
+      7029  1941
+      6599  9233
+      8571 11413
+     11036 14138
+      8733  8951
+      5613  8143
+      1587  1877
+     16673 16811
+      3470 10568
+      3175  3449
+      6541  1664
+     12602  5658
+      1956  9040
+     12554 19736
+     15780 12378
+      9526 16680
+     14837  6373
+     10105   378
+      4589   556
+
+  * 25 random line segments
+    java.lang.ArrayIndexOutOfBoundsException: 100
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.noVerticalOrHorizontalSegments(TestFastCollinearPoints.java:360)
+    TestFastCollinearPoints.test9(TestFastCollinearPoints.java:380)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:814)
+
+    - failed on trial 1 of 100
+
+  * 50 random line segments
+    java.lang.ArrayIndexOutOfBoundsException: 200
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.noVerticalOrHorizontalSegments(TestFastCollinearPoints.java:360)
+    TestFastCollinearPoints.test9(TestFastCollinearPoints.java:381)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:814)
+
+    - failed on trial 1 of 15
+
+  * 100 random line segments
+    java.lang.ArrayIndexOutOfBoundsException: 400
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.noVerticalOrHorizontalSegments(TestFastCollinearPoints.java:360)
+    TestFastCollinearPoints.test9(TestFastCollinearPoints.java:382)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:814)
+
+    - failed on trial 1 of 2
+
+==> FAILED
+
+Test 10: random line segments
+  *  1 random line segment
+    java.lang.ArrayIndexOutOfBoundsException: 4
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.arbitrarySegments(TestFastCollinearPoints.java:394)
+    TestFastCollinearPoints.test10(TestFastCollinearPoints.java:412)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:817)
+
+    - failed on trial 1 of 500
+     4
+      8398 12743
+      8488 13153
+      8749 14342
+      8533 13358
+
+  *  5 random line segments
+    java.lang.ArrayIndexOutOfBoundsException: 20
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.arbitrarySegments(TestFastCollinearPoints.java:394)
+    TestFastCollinearPoints.test10(TestFastCollinearPoints.java:413)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:817)
+
+    - failed on trial 1 of 500
+     20
+      4015  9821
+      3692  9846
+      6044 11638
+      2791  8831
+      6469  8398
+     13678  7562
+     13888  8362
+      6364  7873
+      2723  8776
+      3020  9334
+     11388  5734
+      3314  9558
+      7264 12373
+     11388  7198
+     11388  6222
+     11388  4270
+      8707 13616
+     14602 11082
+      7069 11398
+     14308  9962
+
+  * 25 random line segments
+    java.lang.ArrayIndexOutOfBoundsException: 100
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.arbitrarySegments(TestFastCollinearPoints.java:394)
+    TestFastCollinearPoints.test10(TestFastCollinearPoints.java:414)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:817)
+
+    - failed on trial 1 of 100
+
+  * 50 random line segments
+    java.lang.ArrayIndexOutOfBoundsException: 200
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.arbitrarySegments(TestFastCollinearPoints.java:394)
+    TestFastCollinearPoints.test10(TestFastCollinearPoints.java:415)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:817)
+
+    - failed on trial 1 of 15
+
+  * 100 random line segments
+    java.lang.ArrayIndexOutOfBoundsException: 400
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.arbitrarySegments(TestFastCollinearPoints.java:394)
+    TestFastCollinearPoints.test10(TestFastCollinearPoints.java:416)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:817)
+
+    - failed on trial 1 of 2
+
+==> FAILED
+
+Test 11: random distinct points in a given range
+  * 5 random points in a 10-by-10 grid
+    - number of entries in student   solution: 0
+    - number of entries in reference solution: 1
+    - 1 missing entry in student solution: '(6, 6) -> (7, 6) -> (8, 6) -> (9, 6)'
+
+    - failed on trial 54 of 500
+     5
+         9     6
+         8     6
+         6     5
+         6     6
+         7     6
+
+  * 10 random points in a 10-by-10 grid
+    java.lang.ArrayIndexOutOfBoundsException: 10
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.randomPointsInRange(TestFastCollinearPoints.java:427)
+    TestFastCollinearPoints.test11(TestFastCollinearPoints.java:446)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:820)
+
+    - failed on trial 19 of 500
+     10
+         5     9
+         9     8
+         2     0
+         3     5
+         0     3
+         8     1
+         1     1
+         9     4
+         4     7
+         7     2
+
+  * 50 random points in a 10-by-10 grid
+    java.lang.ArrayIndexOutOfBoundsException: 50
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.randomPointsInRange(TestFastCollinearPoints.java:427)
+    TestFastCollinearPoints.test11(TestFastCollinearPoints.java:447)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:820)
+
+    - failed on trial 1 of 100
+
+  * 90 random points in a 10-by-10 grid
+    java.lang.ArrayIndexOutOfBoundsException: 90
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.randomPointsInRange(TestFastCollinearPoints.java:427)
+    TestFastCollinearPoints.test11(TestFastCollinearPoints.java:448)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:820)
+
+    - failed on trial 1 of 50
+
+  * 200 random points in a 50-by-50 grid
+    java.lang.ArrayIndexOutOfBoundsException: 200
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.randomPointsInRange(TestFastCollinearPoints.java:427)
+    TestFastCollinearPoints.test11(TestFastCollinearPoints.java:449)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:820)
+
+    - failed on trial 1 of 10
+
+==> FAILED
+
+Test 12: m*n points on an m-by-n grid
+  * 3-by-3 grid
+  * 4-by-4 grid
+    java.lang.ArrayIndexOutOfBoundsException: 16
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:462)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 5-by-5 grid
+    java.lang.ArrayIndexOutOfBoundsException: 25
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:463)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 10-by-10 grid
+    java.lang.ArrayIndexOutOfBoundsException: 100
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:464)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 20-by-20 grid
+    java.lang.ArrayIndexOutOfBoundsException: 400
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:465)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 5-by-4 grid
+    java.lang.ArrayIndexOutOfBoundsException: 20
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:466)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 6-by-4 grid
+    java.lang.ArrayIndexOutOfBoundsException: 24
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:467)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 10-by-4 grid
+    java.lang.ArrayIndexOutOfBoundsException: 40
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:468)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 15-by-4 grid
+    java.lang.ArrayIndexOutOfBoundsException: 60
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:469)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+  * 25-by-4 grid
+    java.lang.ArrayIndexOutOfBoundsException: 100
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:107)
+    TestFastCollinearPoints.grid(TestFastCollinearPoints.java:456)
+    TestFastCollinearPoints.test12(TestFastCollinearPoints.java:470)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:823)
+
+==> FAILED
+
+Test 13: check that data type is immutable by testing whether each method
+         returns the same value, regardless of any intervening operations
+  * input8.txt
+    java.lang.ArrayIndexOutOfBoundsException: 8
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testImmutable(TestFastCollinearPoints.java:494)
+    TestFastCollinearPoints.testImmutable(TestFastCollinearPoints.java:578)
+    TestFastCollinearPoints.test13(TestFastCollinearPoints.java:593)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:826)
+
+    - sequence of operations was:
+          FastCollinearPoints collinear = new FastCollinearPoints(points);
+    - failed on trial 1 of 100
+
+  * equidistant.txt
+    java.lang.ArrayIndexOutOfBoundsException: 15
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testImmutable(TestFastCollinearPoints.java:494)
+    TestFastCollinearPoints.testImmutable(TestFastCollinearPoints.java:578)
+    TestFastCollinearPoints.test13(TestFastCollinearPoints.java:594)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:826)
+
+    - sequence of operations was:
+          FastCollinearPoints collinear = new FastCollinearPoints(points);
+    - failed on trial 1 of 100
+
+==> FAILED
+
+Test 14: check that data type does not mutate the constructor argument
+  * input8.txt
+    java.lang.ArrayIndexOutOfBoundsException: 8
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testMutateConstructorArgument(TestFastCollinearPoints.java:607)
+    TestFastCollinearPoints.test14(TestFastCollinearPoints.java:627)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:829)
+
+  * equidistant.txt
+    java.lang.ArrayIndexOutOfBoundsException: 15
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testMutateConstructorArgument(TestFastCollinearPoints.java:607)
+    TestFastCollinearPoints.test14(TestFastCollinearPoints.java:628)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:829)
+
+==> FAILED
+
+Test 15: numberOfSegments() is consistent with segments()
+  * filename = input8.txt
+    java.lang.ArrayIndexOutOfBoundsException: 8
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testNumberOfSegments(TestFastCollinearPoints.java:635)
+    TestFastCollinearPoints.fileNumberOfSegments(TestFastCollinearPoints.java:661)
+    TestFastCollinearPoints.test15(TestFastCollinearPoints.java:666)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:832)
+
+  * filename = equidistant.txt
+    java.lang.ArrayIndexOutOfBoundsException: 15
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testNumberOfSegments(TestFastCollinearPoints.java:635)
+    TestFastCollinearPoints.fileNumberOfSegments(TestFastCollinearPoints.java:661)
+    TestFastCollinearPoints.test15(TestFastCollinearPoints.java:667)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:832)
+
+  * filename = input40.txt
+    java.lang.ArrayIndexOutOfBoundsException: 40
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testNumberOfSegments(TestFastCollinearPoints.java:635)
+    TestFastCollinearPoints.fileNumberOfSegments(TestFastCollinearPoints.java:661)
+    TestFastCollinearPoints.test15(TestFastCollinearPoints.java:668)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:832)
+
+  * filename = input48.txt
+    java.lang.ArrayIndexOutOfBoundsException: 48
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testNumberOfSegments(TestFastCollinearPoints.java:635)
+    TestFastCollinearPoints.fileNumberOfSegments(TestFastCollinearPoints.java:661)
+    TestFastCollinearPoints.test15(TestFastCollinearPoints.java:669)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:832)
+
+  * filename = horizontal5.txt
+  * filename = vertical5.txt
+    java.lang.ArrayIndexOutOfBoundsException: 20
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TestFastCollinearPoints.testNumberOfSegments(TestFastCollinearPoints.java:635)
+    TestFastCollinearPoints.fileNumberOfSegments(TestFastCollinearPoints.java:661)
+    TestFastCollinearPoints.test15(TestFastCollinearPoints.java:671)
+    TestFastCollinearPoints.main(TestFastCollinearPoints.java:832)
+
+  * filename = random23.txt
+==> FAILED
+
+Test 16: throws an exception if either constructor argument is null
+         or any entry in array is null
+  * argument is null
+    - constructor throws wrong exception
+    - constructor throws a java.lang.NullPointerException
+    - constructor should throw a java.lang.IllegalArgumentException
+     0
+
+  * Point[] of length 10, number of null entries = 1
+    - constructor throws wrong exception
+    - constructor throws a java.lang.NullPointerException
+    - constructor should throw a java.lang.IllegalArgumentException
+     10
+      8575  2197
+     23895 18219
+     14637  7813
+      3032  5978
+     11147 25925
+     32129 13979
+      1530 29327
+     22103 16906
+      9761  1125
+     null
+
+  * Point[] of length 10, number of null entries = 10
+  * Point[] of length 4, number of null entries = 1
+  * Point[] of length 3, number of null entries = 1
+    - constructor throws wrong exception
+    - constructor throws a java.lang.NullPointerException
+    - constructor should throw a java.lang.IllegalArgumentException
+     3
+      7970 16581
+     18427 12286
+     null
+
+  * Point[] of length 2, number of null entries = 1
+  * Point[] of length 1, number of null entries = 1
+    - constructor fails to throw an exception
+     1
+     null
+
+==> FAILED
+
+Test 17: check that the constructor throws an exception if duplicate points
+  * 50 points
+  * 25 points
+  * 5 points
+  * 4 points
+  * 3 points
+  * 2 points
+==> passed
+
+
+Total: 4/21 tests passed!
+
+
+================================================================
+********************************************************************************
+*  MEMORY
+********************************************************************************
+
+Analyzing memory of Point
+*-----------------------------------------------------------
+Running 1 total tests.
+
+The maximum amount of memory per Point object is 32 bytes.
+
+Student memory = 24 bytes (passed)
+
+Total: 1/1 tests passed!
+
+================================================================
+
+
+
+********************************************************************************
+*  TIMING
+********************************************************************************
+
+Timing BruteCollinearPoints
+*-----------------------------------------------------------
+Running 10 total tests.
+
+Test 1a-1e: Find collinear points among n random distinct points
+
+
+                                                      slopeTo()
+             n    time     slopeTo()   compare()  + 2*compare()        compareTo()
+-----------------------------------------------------------------------------------------------
+=> passed    16   0.00        3640           0           3640                  165
+=> passed    32   0.00       71920           0          71920                  619
+=> passed    64   0.01     1270752           0        1270752                 2323
+=> passed   128   0.02    21336000           0       21336000                 8854
+=> passed   256   0.65   349585280           0      349585280                34366
+==> 5/5 tests passed
+
+Test 2a-2e: Find collinear points among n/4 arbitrary line segments
+
+
+                                                      slopeTo()
+             n    time     slopeTo()   compare()  + 2*compare()        compareTo()
+-----------------------------------------------------------------------------------------------
+=> passed    16   0.00        3782           0           3782                  165
+=> passed    32   0.00       72700           0          72700                  621
+=> passed    64   0.03     1273758           0        1273758                 2315
+=> passed   128   0.11    21349182           0       21349182                 8873
+=> passed   256   1.86   349639142           0      349639142                34384
+==> 5/5 tests passed
+
+Total: 10/10 tests passed!
+
+
+================================================================
+
+
+
+Timing FastCollinearPoints
+*-----------------------------------------------------------
+Running 31 total tests.
+
+Test 1a-1g: Find collinear points among n random distinct points
+
+
+                                                      slopeTo()
+             n    time     slopeTo()   compare()  + 2*compare()        compareTo()
+-----------------------------------------------------------------------------------------------
+=> passed    64   0.01        7564       17958          43480                20091
+=> passed   128   0.01       31500       86833         205166                94625
+=> passed   256   0.06      128524      409045         946614               437763
+=> passed   512   0.31      519180     1883477        4286134              2011976
+=> passed  1024   0.46     2086924     8518219       19123362              9046110
+=> passed  2048   1.53     8368140    38012691       84393522             40192234
+==> 6/6 tests passed
+
+lg ratio(slopeTo() + 2*compare()) = lg (84393522 / 19123362) = 2.14
+=> passed
+
+==> 7/7 tests passed
+
+Test 2a-2g: Find collinear points among the n points on an n-by-1 grid
+
+                                                      slopeTo()
+             n    time     slopeTo()   compare()  + 2*compare()        compareTo()
+-----------------------------------------------------------------------------------------------
+    java.lang.ArrayIndexOutOfBoundsException: 64
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TimeFastCollinearPoints.timingTest(TimeFastCollinearPoints.java:92)
+    TimeFastCollinearPoints.time(TimeFastCollinearPoints.java:221)
+    TimeFastCollinearPoints.timeGrid1(TimeFastCollinearPoints.java:154)
+    TimeFastCollinearPoints.main(TimeFastCollinearPoints.java:275)
+
+Test 3a-3g: Find collinear points among the n points on an n/4-by-4 grid
+
+                                                      slopeTo()
+             n    time     slopeTo()   compare()  + 2*compare()        compareTo()
+-----------------------------------------------------------------------------------------------
+    java.lang.ArrayIndexOutOfBoundsException: 64
+
+    FastCollinearPoints.<init>(FastCollinearPoints.java:30)
+    TimeFastCollinearPoints.timingTest(TimeFastCollinearPoints.java:92)
+    TimeFa
+
+...
+
+WARNING: the grading output was truncated due to excessive length.
+Typically, this is because you have a method that has an unanticipated side effect
+(such as printing to standard output or throwing an exception). A large amount of output
+can also arise from failing many tests.
